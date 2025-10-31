@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single:wght@100..900&family=Doto:wght@100..900&family=Nosifer&display=swap');
+
+.doto-font {
+  font-family: "Doto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 50;
+  font-style: normal;
+  font-variation-settings:
+    "ROND" 0;
+}
