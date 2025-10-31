@@ -1,6 +1,4 @@
 @import "tailwindcss";
-@import "./Font.css";
-
 @theme {
     --font-test: "Oswald", "sans-serif";
     --font-secondary: "Bitcount Grid Single", "sans-serif";

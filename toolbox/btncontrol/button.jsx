@@ -15,12 +15,7 @@ const FONTS = {
   mono: "font-mono",
 };
 
-const RADIUS = {
-  rounded: "rounded",
-  rsm: "rounded-2",
-  rmd: "rounded-3",
-  rfull: "rounded-4",
-};
+
 
 
 export const Button = forwardRef(function Button(
@@ -30,9 +25,6 @@ export const Button = forwardRef(function Button(
     type = "button",
     size = "medium",
     font = "sans",
-    border = "rounded-3",
-    padding = "p-2",
-    margin = "m-1",
     className = "",
     bgColor = "",
     borderColor = "",
@@ -50,13 +42,9 @@ export const Button = forwardRef(function Button(
   const classes = [
     SIZES[size],
     FONTS[font],
-    padding,
-    margin,
-    RADIUS[border],
     className,
     bgColor,
     borderColor,
-    border,
     borderSize,
     pointers,
     disabled ? "opacity-50 cursor-not-allowed" : "hover:cursor-pointer",
