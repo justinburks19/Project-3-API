@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# root ignores
+/node_modules
+/dist
+# subapp ignores
+/my-react-app/node_modules
+/my-react-app/dist
