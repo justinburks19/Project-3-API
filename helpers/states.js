@@ -1,0 +1,65 @@
+const items = [
+  { label: "Alabama", cordinates: [32.806671, -86.791130] },
+  { label: "Alaska", cordinates: [61.370716, -152.404419] },
+  { label: "Arizona", cordinates: [33.729759, -111.431221] },
+  { label: "Arkansas", cordinates: [34.969704, -92.373123] },
+  { label: "California", cordinates: [36.116203, -119.681564] },
+  { label: "Colorado", cordinates: [39.059811, -105.311104] },
+  { label: "Connecticut", cordinates: [41.597782, -72.755371] },
+  { label: "Delaware", cordinates: [39.318523, -75.507141] },
+  { label: "Florida", cordinates: [27.766279, -81.686783] },
+  { label: "Georgia", cordinates: [33.040619, -83.643074] },
+  { label: "Florida", cordinates: [27.766279, -81.686783] },
+  { label: "Georgia", cordinates: [33.040619, -83.643074] },
+  { label: "Hawaii", cordinates: [21.094318, -157.498337] },
+  { label: "Idaho", cordinates: [44.240459, -114.478828] },
+  { label: "Illinois", cordinates: [40.349457, -88.986137] },
+  { label: "Indiana", cordinates: [39.849426, -86.258278] },
+  { label: "Iowa", cordinates: [42.011539, -93.210526] },
+  { label: "Kansas", cordinates: [38.526600, -96.726486] },
+  { label: "Kentucky", cordinates: [37.668140, -84.670067] },
+  { label: "Louisiana", cordinates: [31.169546, -91.867805] },
+  { label: "Maine", cordinates: [44.693947, -69.381927] },
+  { label: "Maryland", cordinates: [39.063946, -76.802101] },
+  { label: "Massachusetts", cordinates: [42.230171, -71.530106] },
+  { label: "Michigan", cordinates: [43.326618, -84.536095] },
+  { label: "Minnesota", cordinates: [45.694454, -93.900192] },
+  { label: "Mississippi", cordinates: [32.741646, -89.678696] },
+  { label: "Missouri", cordinates: [38.456085, -92.288368] },
+  { label: "Montana", cordinates: [46.921925, -110.454353] },
+  { label: "Nebraska", cordinates: [41.125370, -98.268082] },
+  { label: "Nevada", cordinates: [38.313515, -117.055374] },
+  { label: "New Hampshire", cordinates: [43.452492, -71.563896] },
+  { label: "New Jersey", cordinates: [40.298904, -74.521011] },
+  { label: "New Mexico", cordinates: [34.840515, -106.248482] },
+  { label: "New York", cordinates: [42.165726, -74.948051] },
+  { label: "Wyoming", cordinates: [43.075968, -107.290284] },
+  { label: "North Carolina", cordinates: [35.630066, -79.806419] },
+  { label: "North Dakota", cordinates: [47.528912, -99.784012] },
+  { label: "Ohio", cordinates: [40.388783, -82.764915] },
+  { label: "Oklahoma", cordinates: [35.565342, -96.928917] },
+  { label: "Oregon" , cordinates: [44.572021, -122.070938] },
+  { label: "Pennsylvania" , cordinates: [40.590752, -77.209755] },
+  { label: "Rhode Island", cordinates: [41.680893, -71.511780] },
+  { label: "South Carolina", cordinates: [33.856892, -80.945007] },
+  { label: "South Dakota", cordinates: [44.299782, -99.438828] },
+  { label: "Tennessee", cordinates: [35.747845, -86.692345] },
+  { label: "Texas", cordinates: [31.054487, -97.563461] },
+  { label: "Utah", cordinates: [40.150032, -111.862434] },
+  { label: "Vermont", cordinates: [44.045876, -72.710686] },
+  { label: "Virginia", cordinates: [37.769337, -78.169968] },
+  { label: "Washington", cordinates: [47.400902, -121.490494] },
+  { label: "West Virginia", cordinates: [38.491226, -80.954456] },
+  { label: "Wisconsin", cordinates: [44.268543, -89.616508] },
+  { label: "Wyoming", cordinates: [43.075968, -107.290284] },
+];
+// Function to get sorted list of states
+export function GetStates() {
+    // Sort states alphabetically by label clone array
+    return [...items].sort((a,b) => a.label.localeCompare(b.label));
+};
+// Function to get positions by state label
+export function GetPositions(label) {
+    const cordinates = items.find(item => item.label === label)?.cordinates;
+    return cordinates || null;
+};
