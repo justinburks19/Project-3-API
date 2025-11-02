@@ -9,7 +9,6 @@ export const DropDown = forwardRef(function Dropdown(
     onSelect, // Callback for selection
     //Main button props
     shadow = true,
-    mainBorderColor = "!border-gray-300",
     //Dropdown menue props
     menueRound = "rounded",
     menueBorderColor = "!border-black",
@@ -18,18 +17,21 @@ export const DropDown = forwardRef(function Dropdown(
     maxHeight = "max-h-60",
     //pointers
     pointer = "hover:cursor-pointer",
+    listItemClass = "",
+    ulClass = "",
   },
   ref
 ) {
   //current issue. Boot Strap sucks when it comes to Tailwindd. Need to manually hide menue on select.
   const [open, setOpen] = useState(null);
+  
 
   return (
     // Toolbox Dropdown Button using Bootstrap 5
     <div className="dropdown" ref={ref}>
       {/* Dropdown Toggle Button */}
       <button
-        className={` dropdown-toggle rounded p-1 border-b-1 ${mainBorderColor} 
+        className={` dropdown-toggle rounded p-1 border-b-1 
         ${shadow ? "shadow" : ""}  
         ${pointer}
         ${menueClass}
@@ -68,24 +70,21 @@ export const DropDown = forwardRef(function Dropdown(
         gap-1
         sm:gap-0
         ![--bs-dropdown-min-width:0]
+        ${ulClass}
         `}
       >
         {items.length > 0 ? (
           items.map((item, index) => (
-            <li key={index} className="!hover:cursor-pointer !col-span-1
+            <li key={index} className={`!hover:cursor-pointer !col-span-1
             text-[clamp(.8rem,2vw,1.5rem)] 
-            
-            
-            ">
+            ${listItemClass}
+
+
+            `}>
               <a
                 className={`dropdown-item  
-                  !p-2 
-                  !mt-1
-                  !sm:mt-0
-                  !sm:p-0 
-                  sm:p-0
                   ${buttonClass}
-
+                  !text-center
                   `}
                 href={item.href}
                 // Handle selection for label update

@@ -1,7 +1,7 @@
 import { React, useEffect } from "react";
 import {Button} from "../../toolbox/btncontrol/button.jsx";
 import { UseTimeTheme } from "../../helpers/useTimeTheme.js";
-import { Weather } from "./Weather.jsx";
+import { Weather } from "./weather.jsx";
 import {useState} from "react";
 
 export function Home() {

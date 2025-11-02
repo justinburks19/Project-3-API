@@ -20,6 +20,7 @@ export function WeatherInfo(x, y) {
       const windSpeed = info?.wind?.speed ?? "N/A"; // Wind speed
       const windDeg = info?.wind?.deg ?? "N/A"; // Wind direction in degrees
       const cloudiness = info?.clouds?.all ?? "N/A"; // Cloudiness percentage
+      const timezone = info?.timezone ?? "N/A"; // Timezone offset in seconds
 
-    return [temp, description, pressure, humidity, seaLevel, windSpeed, windDeg, cloudiness, isLoading, error, name];
+    return [temp, description, pressure, humidity, seaLevel, windSpeed, windDeg, cloudiness, isLoading, error, name, timezone];
   }
