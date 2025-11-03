@@ -2,6 +2,9 @@ import { DropDown } from "../../toolbox/dropdownbtns/dropdown.jsx";
 import { useState, useEffect } from "react";
 import { GetStates, GetPositions} from "../../helpers/states.js";
 import { WeatherInfo } from "../../helpers/weatherInfo.js";
+import {motion} from "framer-motion"
+import WindUrl from "../../public/wind.svg" 
+import Leaf from "../../public/leaf.svg"
 
 export function Weather() {
   const [label, setLabel] = useState("New York");
@@ -172,19 +175,45 @@ export function Weather() {
       {temp === "N/A" ? <p className="text-red-500">Error: {error}</p> : (
         <>
         <div className="border-2 w-8/12 mt-3 mx-auto 
-        font-bold
+        font-extrabold
         text-[clamp(1rem,2vw,1.5rem)]
         font-shadowy">
-          
-          <p className="text-center"> Location: {name}</p>
-          <div className="grid grid-cols-2 gap-4">
-          <p>Temperature: {temp}°F</p>
-          <p>Condition: {description}</p>
-          <p>Pressure: {pressure} hPa</p>
-          <p>Humidity: {humidity}%</p>
+          <p className="text-center mb-0 underline"> Location: {name}</p>
+          <div className="grid grid-cols-3 p-1 text-center">
+            <p className="mt-0 pt-0 top-0 text-start" style={{transform: "rotate(-10deg)"}}>
+              {temp}°F
+            </p>
+            <p >Condition: {description}</p>
+            <div className="col-span-1 relative border-2">
+              {windSpeed >= 0.1 &&
+              <motion.img src={Leaf} alt="Leaf Icon" 
+              className="w-[clamp(2rem,2vw,2.5rem)] h-[clamp(2rem,2vw,2.5rem)] absolute
+              left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+              key={windSpeed, windDeg}// when windspeed changes update the speed or when winddeg;)
+              
+              initial={{x: -100, rotate: 0}}
+              animate={{rotate: 180,x: [-100, 100]}}
+              transition={{"x": {repeat: Infinity, duration: 50/windSpeed, ease: "linear"},
+              "rotate": {repeat: Infinity, duration: 2, ease: "linear"}}}
+              />
+              }
+              <p className="text-end" style={{transform: "rotate(10deg)"}} >{windSpeed} 
+                Mph Winds
+              </p>
+            </div>
+            <p>Pressure: {pressure} hPa</p>
+            <p>Humidity: {humidity}%</p>
           <p>Sea Level: {seaLevel} hPa</p>
-          <p>Wind Speed: {windSpeed} mph</p>
-          <p>Wind Direction: {windDeg}°</p>
+          <div className="col-span-1">
+          <p className="mb-0 pb-0">Wind Direction: {windDeg}°</p>
+          {/* svg gets uploaded here */}
+          <div className="w-[clamp(2rem,2vw,2.5rem)] h-[clamp(2rem,2vw,2.5rem)] mx-auto">
+          <img src={WindUrl} alt="Wind Direction Icon" 
+          className="mx-auto"
+          style={{transform: `rotate(${windDeg+180}deg)`}}
+          />
+          </div>
+          </div>
           <p>Cloudiness: {cloudiness}%</p>
           </div>
           </div>
