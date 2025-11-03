@@ -11,7 +11,7 @@ const getTheme = () => {
   const isLight = hour >= 6 && hour < 18; //light theme between 6 AM and 6 PM
     // Return theme object
   return isLight ? {
-      bg: { background: "linear-gradient(200deg, #1dcae0b6, #b40404ff)" },
+      bg: { background: "linear-gradient(200deg, #1dcae0b6, #0370ffff)" },
       borderClass: "border-slate-900 border-20",
     } 
     :{ //return dark theme if not between 6 AM and 6 PM

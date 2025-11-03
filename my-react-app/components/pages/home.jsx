@@ -24,7 +24,7 @@ export function Home() {
 
   return (
     // Home Page Container
-    <div className={`min-h-screen flex flex-col p-1 ${borderClass} !border-black`} style={{ ...bg }}>
+    <div className={`min-h-screen flex flex-col p-1 font-test ${borderClass} !border-black`} style={{ ...bg } }>
       {/* Animated Title */}
       {!show && (
       <h1 className="!text-[clamp(2rem,8vw,12rem)] mt-3 ml-auto mr-auto relative font-gta text-white">
@@ -42,14 +42,16 @@ export function Home() {
       
       
       {/* start of Button Grid */}
-      <div className={`wrapper ml-auto mr-auto mt-10 border-5 !border-t-4 w-full max-w-50/100 !border-black
+      <div className={`ml-auto mr-auto mt-10 border-5 !border-t-4 w-full max-w-50/100 !border-black
         ${show ? `max-w-90/100 font-blue-500` : "max-w-50/100"} `}>
       {/* Top of Grid X*/}
-      <div className="header-text w-full border-b-3 ">
-        <Button className="!p-1 !m-1 bg-black text-slate-500 font-bold !text-red-500 !border-2 !hover:border-red-500 !text-[clamp(.7rem,.7vw,1rem)]" 
+      <div className="header-text w-full border-b-3 my-auto flex content-start-end flex flex-row-reverse">
+        <div>
+        <Button className="!p-1 !m-1 bg-black text-slate-500 font-bold !text-red-500 !border-2 !hover:border-red-500 !text-[clamp(.7rem,.7vw,1rem)] !rounded-none " 
         onClick={() => setExit(!exit)}>
           X
         </Button>
+        </div>
       </div>
 
         <div className={`grid grid-cols-3 p-2 justify-items-inbetween items-center !border-black`}>
@@ -58,7 +60,9 @@ export function Home() {
           !exit && (
             <div key={index} className="grid-col-span-1 p-2 !border-black">
               <Button 
-                className={`${background} ${borders} ${hover} !text-[clamp(1rem,1.2vw,2rem)] w-full ${label === "Movie Api" || label === "Crypto Api" ? "hover:opacity-50 !cursor-not-allowed" : "text-black"} font-bold`}
+                className={`
+                  
+                  ${background} ${borders} ${hover} !text-[clamp(1rem,1.5vw,3rem)] w-full ${label === "Movie Api" || label === "Crypto Api" ? "hover:opacity-50 !cursor-not-allowed" : "text-black"} font-bold`}
                 onClick={() => buttonClicks({label})}>{label}
               </Button>
             </div>

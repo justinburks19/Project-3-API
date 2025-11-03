@@ -6,6 +6,7 @@ import { motion } from "framer-motion"
 import WindUrl from "../../public/wind.svg"
 import Leaf from "../../public/leaf.svg"
 import Cloud from "../../src/assets/cloud.svg?react"
+import Sun from "../../src/assets/sun.svg?react"
 
 export function Weather() {
   //measuring the container size!
@@ -45,15 +46,26 @@ export function Weather() {
   //cordinates edits
   const labelClass = "hover:cursor-pointer w-8/10";
   return (
-    <div className="border-t-3 !border-black">
+    <div className="border-t-3 relative">
+      
+      <div className="absolute left-1/2 -translate-x-1/2 top-20">
+      {/* Sun Icon */}
+        <Sun className="mx-auto mt-[clamp(2rem,3vw, 5rem)] w-[clamp(5rem,15vw,20rem)] h-[clamp(5rem,15vw,20rem)] " />
+      </div>
       {/* subtitle */}
-      <div className="mt-6 mb-6 p-4 !border-black">
-        <h2 className="text-center border-b-6 border-t-2 border-r-3 border-l-3
+      <div className="mt-6 mb-6 p-4 !border-black ">
+        <motion.h2 className="text-center border-b-6 border-t-2 border-r-3 border-l-3
       w-8/10 ml-auto mr-auto 
       pt-7 pb-7 
-      bg-green-600 !border-black">
+      bg-green-500 !border-slate-600 shadow-lg rounded-5"
+      initial={{opacity:1, scale:1}}
+      animate={{opacity:[1,0], scale:[1,0.5]}}
+      transition={{
+      opacity:{duration:5,repeat: Infinity, repeatType: "loop", ease:"linear"}, 
+      scale:{duration:5, repeat: Infinity, repeatType: "loop", ease:"linear"},
+      }}>
           Check the weather by selecting a state or select your own coordinates
-        </h2>
+        </motion.h2>
       </div>
       {/* top selection area */}
       <div className="grid grid-cols-2 gap-l-2 w-full border-b-3 h-full w-full !border-black">
@@ -62,7 +74,7 @@ export function Weather() {
           <DropDown
             label={label}
             items={GetStates()}
-            menueClass="!bg-green-600 !text-black !text-[clamp(1rem,2vw,2rem)] hover:cursor-pointer !shadow-2xl 
+            menueClass="!bg-green-500 !text-black !text-[clamp(1rem,2vw,2rem)] hover:cursor-pointer !shadow-2xl 
             border-b-5 border-l-5 border-t-3 border-r-3
             hover:border-b-3 hover:border-l-3 hover:border-t-2 hover:border-r-2
             border-black"
@@ -70,7 +82,7 @@ export function Weather() {
             listItemClass={`!border-b-6 !border-t-4 !border-l-6 !border-r-6 
               !hover:border-b-2 !hover:border-l-2 !hover:border-r-1
               `}
-            ulClass="!p-1 !bg-green-600"
+            ulClass="!p-1 !bg-green-500"
             onSelect={(label) => {
               setLabel(label);
               setRetMethod("state");
@@ -81,13 +93,13 @@ export function Weather() {
         <div className="grid-col-span-1 align-center 
         w-9/10 
         border-l-5 border-b-5 border-l-3 border-r-3 border-t-3 border-black
-        bg-green-600
+        bg-green-500
         mx-auto
         p-4
         relative
         ">
 
-          <p className="text-center bg-green-600 border-l-5 border-b-5 border-r-5 border-t-3 border-black
+          <p className="text-center bg-green-500 border-l-5 border-b-5 border-r-5 border-t-3 border-black
           text-[clamp(.8rem,1.5vw,2rem)]">
             Enter Your Location via coordinates
           </p>
@@ -133,7 +145,7 @@ export function Weather() {
 
             <div className="mx-auto col-span-2 mt-4 w-full h-full">
               <button
-                className="bg-green-600 text-white p-2 border-b-7 border-l-4 border-t-3 border-r-4
+                className="bg-green-500 text-white p-2 border-b-7 border-l-4 border-t-3 border-r-4
             hover:border-b-2 hover:border-l-2 hover:border-t-1 hover:border-r-2
             border-black
             !text-black
@@ -155,7 +167,7 @@ export function Weather() {
         {/*Display of Coordinates*/}
         {/* lets practice contorl. I have a original grid that takes up 2 splaces */}
         <div className="mx-10 mt-4 col-span-2 
-      border-b-6 border-l-5 border-r-5 border-t-4 bg-green-600 mb-2 border-black">
+      border-b-6 border-l-5 border-r-5 border-t-4 bg-green-500 mb-2 border-black">
           {/* nested grid for content which splits to 2 columns */}
           <div className="grid grid-cols-2">
             {/* left side shows method used */}
@@ -200,24 +212,22 @@ export function Weather() {
         text-[clamp(1rem,2vw,4rem)]
         font-shadowy
         mb-10
-        !bg-green-600
+        !bg-green-500
         relative
         text-black">
 
-            {description !== "clear sky" ?
-              <div className="absolute w-full mt-0 top-0"
-                style={{ opacity: .5 }}>
+          {description !== "clear sky" ?
+            <div className="absolute w-full mt-0 top-0"
+              style={{ opacity: .5 }}>
 
-                <Cloud className="mx-auto w-[clamp(5rem,15vw,20rem)] h-[clamp(5rem,15vw,20rem)] animate-pulse
-          text-white
-          [&_*]:stroke-current /* all children within <Cloud>, stroke current color */
-          [&_*]:fill-cyan-200 /* all children within <Cloud>, fill cyan-200 */
-          -z-100
-          "
-                />
+              <Cloud className="mx-auto w-[clamp(5rem,15vw,20rem)] h-[clamp(5rem,15vw,20rem)] animate-pulse
+        text-white
+        [&_*]:stroke-current /* all children within <Cloud>, stroke current color */
+        [&_*]:fill-cyan-200 /* all children within <Cloud>, fill cyan-200 */
+        -z-100" />
 
-              </div> : null}
-            <p className="relative text-center mb-0 underline hover:scale-150 hover:border-b-3 hover:border-r-2 hover:border-l-2 hover:border-t-2 hover:w-5/10 hover:mx-auto z-[10]">
+            </div> : null}
+            <p className="relative text-center mb-0 underline hover:w-5/10 hover:mx-auto z-[10]">
               Location: {name}
             </p>
             <div className="grid sm:grid-cols-1 md:grid-cols-3 p-5 text-center">
