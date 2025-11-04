@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { motion } from "framer-motion";
+import { viewport } from "@popperjs/core";
 
 export function SmokeEffects({
   count = 100,               // number of smoke puffs
@@ -41,7 +42,7 @@ export function SmokeEffects({
   }, [count, text, myText]); // depend only on count prop
 
   return (
-    <div className="absolute inset-0 z-1 pointer-events-none  w-full h-full overflow-hidden">
+    <div className="absolute inset-0 z-1 pointer-events-none  w-full h-full overflow-hidden rounded-5">
       {!text ? (
       <div>
       {seeds.map(({ size, left, delay, duration, color, easeWay, blur, text }, i) => (
@@ -57,11 +58,11 @@ export function SmokeEffects({
           }}
           initial={{x: '0%',  y: '50%', opacity: 0, scale: 0.7 }}
           animate={{
-            x: [0, -20, -40, -60, -80, -100],  // float left or right
-            y: '-100vh',           // float up up or down like fire
+            x: [0,-100],  // float left or right
+            y: ['0vh', '-93vh'],           // float up up or down like fire
             
-            opacity: [0, 0.6, .8, 1, 0.4, 0],
-            scale: [0.7, 1.2, 1.8, 1.1, 0.2, .1, 1, 3, 2.5, 1],
+            opacity: [0.1,1],
+            scale: [.3,2],
           }}
           transition={{
             duration,
@@ -88,8 +89,8 @@ export function SmokeEffects({
           initial={{ y: '50%', opacity: 0, scale: 0.7 }}
           animate={{
             y: '-100vh',
-            opacity: [0, 0.6, .8, 1, 0.4, 0],
-            scale: [0.7, 1.2, 1.8, 1.1, 0.2, .1, 1, 3, 2.5, 1],
+            opacity: [.1,1],
+            scale: [.3, 2],
           }}
           transition={{
             duration: Math.random() * 20 + 5,

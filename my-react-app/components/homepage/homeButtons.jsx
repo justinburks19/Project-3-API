@@ -1,8 +1,7 @@
 import { Button } from "../../toolbox/btncontrol/button.jsx";
-import { useState } from "react";
 import { useControl } from "../../toolbox/controls/useControl.jsx";
 import { Weather } from "../pages/weather.jsx";
-import { motion, scale } from "framer-motion";
+import { motion} from "framer-motion";
 export function HomeButtons() {
   const { show, setShow, exit, setExit } = useControl();
   // Button definitions with styles and hover effects
@@ -25,7 +24,7 @@ export function HomeButtons() {
     <div className={`mx-auto`}>
       {/* Top of Grid X*/}
 
-      <div className={`grid grid-cols-3 p-2 justify-items-inbetween items-center !border-black`}>
+      <div className={`flex flex-row justify-items-inbetween items-center !border-black justify-center bg-black rounded-5 w-full`}>
 
         {buttons.map(({ label, index, background, borders, hover }) => (
           !exit && (
