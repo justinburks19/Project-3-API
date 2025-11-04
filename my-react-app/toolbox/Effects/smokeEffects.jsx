@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { motion } from "framer-motion";
 
 export function SmokeEffects({
-  count = 20,               // number of smoke puffs
+  count = 100,               // number of smoke puffs
   colors = ["bg-red-700", "bg-yellow-700"],        // tailwind color for smoke
   blur = ["blur-[5px]", "blur-[6px]","blur-[2px]", "blur-[0px]"],          // tweak softness
   easeway = ["easeInOut", "easeIn", "easeOut", "linear"], //easing options
@@ -38,7 +38,7 @@ export function SmokeEffects({
       text,
       };
     });
-  }, [count, colors]); // depend only on count prop
+  }, [count, text, myText]); // depend only on count prop
 
   return (
     <div className="absolute inset-0 z-1 pointer-events-none  w-full h-full overflow-hidden">
@@ -78,12 +78,12 @@ export function SmokeEffects({
       ) : (
       <div>
       <motion.span>
-      {seeds.map(({ text }, i) => (
+      {seeds.map(({ text, left }, i) => (
         <motion.span
           key={i} 
           className={`absolute text-[clamp(1rem,3vw,4rem)] bottom-0 transform-gpu will-change-transform`}
           style={{
-            left: `${Math.random() * 100}%`,
+            left: `${left}%`,
           }}
           initial={{ y: '50%', opacity: 0, scale: 0.7 }}
           animate={{

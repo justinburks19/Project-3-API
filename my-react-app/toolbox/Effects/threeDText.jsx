@@ -9,7 +9,6 @@ export function ThreeDText({
     begin = "",
     end = "",
     font = "bungee-regular",
-    smoke = false,
     }){
     //create a array to extract emojis if present
   return (
