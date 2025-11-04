@@ -170,7 +170,7 @@ export function Weather() {
                 </p>
               </div>
             </div>
-            {/* right side shows coordinates used */}
+            {/* right side shows coordinates used test*/} 
             <div className="col-span-1 my-auto ">
               <div className="grid grid-cols-2 text-center">
                 <p className="mt-0 mb-0 col-span-1 mx-2
