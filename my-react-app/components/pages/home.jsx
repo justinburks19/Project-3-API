@@ -3,7 +3,7 @@ import { Button } from "../../toolbox/btncontrol/button.jsx";
 import { UseTimeTheme } from "../../helpers/useTimeTheme.js";
 import { Weather } from "./weather.jsx";
 import { useState } from "react";
-import { HomeTitle } from "../homepage/homeTitle.jsx";
+import { ThreeDText } from "../../toolbox/Effects/threeDText.jsx";
 import { SmokeEffects } from "../../toolbox/Effects/smokeEffects.jsx";
 
 
@@ -66,7 +66,7 @@ export function Home() {
       </div>
       {!show && (
         <div className="absolute top-2/4 w-full">
-          <HomeTitle title="Project 3" begin="🔥" end="🔥" startEnd={true} />
+          <ThreeDText title="Project 3" begin="🔥" end="🔥" startEnd={true} />
 
         </div>
         )}

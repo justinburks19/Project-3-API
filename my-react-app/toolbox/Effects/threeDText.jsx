@@ -1,6 +1,6 @@
 import { start } from "@popperjs/core";
 import {motion} from "framer-motion";
-export function HomeTitle({
+export function ThreeDText({
     //props
     title, 
     size = "!text-[clamp(2rem,10vw,20rem)]", 
