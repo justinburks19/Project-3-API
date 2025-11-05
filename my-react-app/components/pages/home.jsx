@@ -20,11 +20,11 @@ export function Home() {
         <div className={`min-h-screen border-r-15 border-t-15 border-b-20 border-l-20 border-black relative bg-black`}>
           {/* Inner Container */}
           <div className={` border-5 
-          ${pageTracker === "Weather Api" ? '!border-green-500' :
-              pageTracker === 'Movie Api' ? 'border-blue-500' :
-                pageTracker === 'Crypto Api' ? 'border-purple-500' :
-                  pageTracker === 'Home' ? 'border-orange-500' : 'border-slate-700'} absolute inset-0 shadow-lg rounded-5 
-            ${hover === 'Weather Api' ? '!border-green-600' :
+          ${pageTracker === "Weather Api" ? '!border-green-500 !brightness-125' :
+              pageTracker === 'Movie Api' ? 'border-blue-500 !brightness-125' :
+                pageTracker === 'Crypto Api' ? 'border-purple-500 !brightness-125' :
+                  pageTracker === 'Home' ? 'border-orange-500 !brightness-125' : 'border-slate-700'} absolute inset-0 shadow-lg rounded-5 
+            ${hover === 'Weather Api' ? '!border-green-600 ' :
               hover === 'Movie Api' ? '!border-blue-600' :
                 hover === 'Crypto Api' ? '!border-purple-600' :
                   hover === 'Home' ? '!border-orange-600' : ''}`} style={{ ...bg, }}>

@@ -6,8 +6,8 @@ export function SmokeEffects({
   count = 100,               // number of smoke puffs
   colors = ["bg-red-700", "bg-yellow-700"],        // tailwind color for smoke
   blur = ["blur-[5px]", "blur-[6px]","blur-[2px]", "blur-[0px]"],          // tweak softness
-  easeway = ["easeInOut", "easeIn", "easeOut", "linear"], //easing options
-
+  easeway = ["easeInOut", "easeIn", "easeOut"], //easing options
+  upOrDown = ["linear", "mirror"], // not used yet
   //control for text 
   text = false,              // optional text inside smoke puff
   myText = "💨",          // text to show if text is true
@@ -15,18 +15,14 @@ export function SmokeEffects({
   const seeds = useMemo(() => {  // useMemmo to avoid recalculating on every render
     // lets have 2 different numbers! As a barrier to entry!
     const rnd = (min, max) => Math.random() * (max - min) + min;
-    // random number generator
-    if (text) return Array.from({ length: count }, () => {
-      return {
-        text: myText,
-      };
-    });
+
 
     return Array.from({ length: count }, () => {
         const color = colors[Math.floor(Math.random() * colors.length)]; // pick random color from array
         const easeWay = easeway[Math.floor(Math.random() * easeway.length)]; // pick random easing from array
         const blurType = blur[Math.floor(Math.random() * blur.length)]; // pick random blur from array
-      return {
+        const upOrDownType = upOrDown[Math.floor(Math.random() * upOrDown.length)]; // pick random up or down from array
+      if (!text) {  return {
       size: rnd(10, 30),               // size of the puff
       left: rnd(0, 100),               // left position in %
       delay: rnd(0, 20),                // how long to wait before starting
@@ -37,15 +33,27 @@ export function SmokeEffects({
       easeWay,
       blur : blurType,
       text,
-      };
+      upOrDownType,
+      }; } 
+        else { return {
+        text: myText,
+        left: rnd(0, 100),               // left position in %
+        delay: rnd(0, 10),                // how long to wait before starting
+        duration: rnd(5, 10),            // duration of the puff
+        easeWay,
+        upOrDownType: "linear",
+        size: rnd(1,20)
+
+      }; } 
+
     });
   }, [count, text, myText]); // depend only on count prop
 
   return (
-    <div className="absolute inset-0 z-1 pointer-events-none  w-full h-full overflow-hidden rounded-5">
+    <div className="absolute inset-0 z-1 pointer-events-none  w-full h-full  rounded-5">
       {!text ? (
       <div>
-      {seeds.map(({ size, left, delay, duration, color, easeWay, blur, text }, i) => (
+      {seeds.map(({ size, left, delay, duration, color, easeWay, blur, text, upOrDownType }, i) => (
         
         <motion.span
           key={i} // each puff needs a unique key 1-counter
@@ -69,7 +77,7 @@ export function SmokeEffects({
             delay,
             ease: easeWay,
             repeat: Infinity,
-            repeatType: "mirror", // alternate direction on each repeat. Be like fire :)
+            repeatType: upOrDownType, // alternate direction on each repeat. Be like fire :)
           }}
         />
         
@@ -79,25 +87,27 @@ export function SmokeEffects({
       ) : (
       <div>
       <motion.span>
-      {seeds.map(({ text, left }, i) => (
+      {seeds.map(({ text, left}, i) => (
         <motion.span
           key={i} 
-          className={`absolute text-[clamp(1rem,3vw,4rem)] bottom-0 transform-gpu will-change-transform`}
+          className={`absolute inset-0 text-[clamp(.5rem,1vw,3rem)] transform-gpu will-change-transform pointer-events-none`}
           style={{
             left: `${left}%`,
+            top: '-5vh',
           }}
-          initial={{ y: '50%', opacity: 0, scale: 0.7 }}
+          initial={{ y: '0', opacity: 0, scale: 0.7 }}
           animate={{
-            y: '-100vh',
+            y: ['-95%','100%'], //start from top to bottom! Testing with rain effect
+            //x: ['-5vh','5vw'], // can drive left to right, to left to stitmulate wind looks like like snow lol ;)
             opacity: [.1,1],
-            scale: [.3, 2],
+            scale: [1, .3],
           }}
           transition={{
             duration: Math.random() * 20 + 5,
             delay: Math.random() * 20,
             ease: "easeInOut",
             repeat: Infinity,
-            repeatType: "mirror", // alternate direction on each repeat. Be like fire :)
+            repeatType: "linear",
           }}
         >
           {text}

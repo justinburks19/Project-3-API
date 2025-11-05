@@ -5,8 +5,8 @@ export function HomeTitle() {
     return (   
         <>
           {!show && (
-            <div className="absolute top-2/4 w-full">
-              <ThreeDText title="Project 3" begin="🔥" end="🔥" startEnd={true} />
+            <div className="absolute top-2/4 w-full text-center">
+              <ThreeDText title="Project 3" begin="🔥" end="🔥" startEnd={true} className="!text-[clamp(2rem,10vw,20rem)]"/>
     
             </div>
           )}

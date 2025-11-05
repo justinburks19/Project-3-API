@@ -6,26 +6,32 @@ import { motion } from "framer-motion"
 import WindUrl from "../../public/wind.svg"
 import Leaf from "../../public/leaf.svg"
 import Cloud from "../../src/assets/cloud.svg?react"
+import { useControl } from "../../toolbox/controls/useControl.jsx";
+import { ThreeDText } from "../../toolbox/Effects/threeDText.jsx";
+import{SmokeEffects} from"../../toolbox/Effects/smokeEffects.jsx"
+import WaterDrop from "../../src/assets/waterDrop.svg";
 
 export function Weather() {
-  //measuring the container size!
-
-  const [label, setLabel] = useState("New York");
-  // Which way am i going to get the coordinates?
-  const [retMethod, setRetMethod] = useState("state"); //set to state by default
-  // state cords
-  const stateCords = GetPositions(label);
-  const [stateLat, stateLong] = stateCords;
-
-  //User Cords
-  const [getLat, setGetLat] = useState("");
-  const [getLong, setGetLong] = useState("");
+  //use control context to get global states
+  const {
+    label,
+    setLabel,
+    retMethod,
+    setRetMethod,
+    stateLat,
+    stateLong,
+    getLat,
+    setGetLat,
+    getLong,
+    setGetLong,
+  } = useControl();
 
   //choose what to use based on retMethod
   const lat = retMethod === "state" ? stateLat : getLat;
 
   const long = retMethod === "state" ? stateLong : getLong;
 
+  //fetch weather info based on lat and long
   const [
     temp,
     description,
@@ -45,16 +51,20 @@ export function Weather() {
   //cordinates edits
   const labelClass = "hover:cursor-pointer w-8/10";
   return (
-    <div className="border-t-3 !border-black">
-      {/* subtitle */}
-      <div className="mt-6 mb-6 p-4 !border-black">
-        <h2 className="text-center border-b-6 border-t-2 border-r-3 border-l-3
-      w-8/10 ml-auto mr-auto 
-      pt-7 pb-7 
-      bg-green-600 !border-black">
-          Check the weather by selecting a state or select your own coordinates
-        </h2>
+    //start of main container
+    <div className="border-t-3 !border-black grid grid-cols-2">
+
+      {/* left side nav */}
+      <div className="gpu-accelerated-text !text-[clamp(1.5rem,4vw,6rem)] mx-auto relative col-span-1 w-full h-full pt-3 w-fit">
+        <div className="inset-0"><SmokeEffects text={true} myText='💧' />
+        </div>
+        
+        <ThreeDText title="Weather Console" begin="☁️" end="☁️" startEnd={true} className="!text-[clamp(.8rem,1vw,6rem)]
+        text-center " 
+        threeDAlignment="top-[clamp(0.1rem,.4vw,1rem)] right-[clamp(0.3rem,.4vw,1rem)]"/>
       </div>
+
+
       {/* top selection area */}
       <div className="grid grid-cols-2 gap-l-2 w-full border-b-3 h-full w-full !border-black">
         {/*left side dropdown*/}
@@ -89,7 +99,7 @@ export function Weather() {
 
           <p className="text-center bg-green-600 border-l-5 border-b-5 border-r-5 border-t-3 border-black
           text-[clamp(.8rem,1.5vw,2rem)]">
-            Enter Your Location via coordinates
+            Welcome To The Weather Console!
           </p>
           {/* lat/long inputs */}
           <div className="

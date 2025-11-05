@@ -3,20 +3,21 @@ import {motion} from "framer-motion";
 export function ThreeDText({
     //props
     title, 
-    size = "!text-[clamp(2rem,10vw,20rem)]", 
     color = "!text-green-500", 
     startEnd = false,
     begin = "",
     end = "",
     font = "bungee-regular",
+    className = "",
+    threeDAlignment = "top-[clamp(0.1rem,.8vw,1rem)] right-[clamp(0.3rem,.6vw,1rem)]",
     }){
     //create a array to extract emojis if present
   return (
   //give a relative spacing container
   <>
-  <div className="text-center relative overflow-hidden">
+  <div className="relative overflow-hidden">
   
-<h1 className={`${size} ${font} ${color} justify-center top-0`}>
+<h1 className={` ${font} ${color} justify-center top-0 ${className}`}>
     {/* Animated Title */}
         <motion.span 
         initial = {{ x: 0, opacity: 0 }}
@@ -41,7 +42,7 @@ export function ThreeDText({
         </motion.span>
     {/* Slide in title */}
         <div>
-        <motion.span className={`absolute top-[clamp(0.1rem,.8vw,1rem)] right-[clamp(0.3rem,.6vw,1rem)] w-full h-full pointer-events-none transform-gpu`}
+        <motion.span className={`absolute ${threeDAlignment} w-full h-full pointer-events-none transform-gpu`}
         initial = {{ x:'-100%' , opacity: 0 }}
         animate = {{ x: 0, opacity: .20 }}
         transition = {{duration: 2, ease: "easeInOut" }}
