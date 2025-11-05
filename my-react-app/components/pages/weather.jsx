@@ -52,23 +52,20 @@ export function Weather() {
   const labelClass = "hover:cursor-pointer w-8/10";
   return (
     //start of main container
-    <div className="border-t-3 !border-black grid grid-cols-2">
+    <div className=" border-t-3 !border-black grid grid-cols-2">
 
       {/* left side nav */}
-      <div className="gpu-accelerated-text !text-[clamp(1.5rem,4vw,6rem)] mx-auto relative col-span-1 w-full h-full pt-3 w-fit">
-        <div className="inset-0"><SmokeEffects text={true} myText='💧' />
+      <div className="relative gpu-accelerated-text col-span-1 pt-3 h-full border-black overflow-hidden">
+        <div className="absolute w-full h-full top-[-8%]">
+          <SmokeEffects text={true} myText='💧' />
         </div>
-        
-        <ThreeDText title="Weather Console" begin="☁️" end="☁️" startEnd={true} className="!text-[clamp(.8rem,1vw,6rem)]
-        text-center " 
-        threeDAlignment="top-[clamp(0.1rem,.4vw,1rem)] right-[clamp(0.3rem,.4vw,1rem)]"/>
-      </div>
 
-
-      {/* top selection area */}
-      <div className="grid grid-cols-2 gap-l-2 w-full border-b-3 h-full w-full !border-black">
-        {/*left side dropdown*/}
-        <div className="grid-col-span-1 ml-auto mr-auto justify-center">
+        <div className="w-90/100 mx-auto">
+        <ThreeDText title="Weather Console" begin="☁️" end="☁️" startEnd={true} className="!text-[clamp(.8rem,3vw,6rem)]
+        text-center " threeDAlignment="top-[clamp(0.1rem,.4vw,1rem)] right-[clamp(0.3rem,.4vw,1rem)]"/>
+        </div>
+          <div className="text-center">
+          <h1 className="!text-green-500">Select A State</h1>
           <DropDown
             label={label}
             items={GetStates()}
@@ -86,30 +83,8 @@ export function Weather() {
               setRetMethod("state");
             }} // Update label on selection
           />
-        </div>
-        {/*right side map placeholder*/}
-        <div className="grid-col-span-1 align-center 
-        w-9/10 
-        border-l-5 border-b-5 border-l-3 border-r-3 border-t-3 border-black
-        bg-green-600
-        mx-auto
-        p-4
-        relative
-        ">
-
-          <p className="text-center bg-green-600 border-l-5 border-b-5 border-r-5 border-t-3 border-black
-          text-[clamp(.8rem,1.5vw,2rem)]">
-            Welcome To The Weather Console!
-          </p>
-          {/* lat/long inputs */}
-          <div className="
-          p-2
-          flex flex-col 
-          md:flex-col md:m-2
-          lg:grid lg:grid-cols-2
-          gap-0 md:gap-2 justify-items-center align-items-center
-          ">
-            {/*left side lat input*/}
+          <h1 className="!text-green-500">Or enter coordinates</h1>
+          <div className="flex flex-row px-2">
             <div className=" border-l-6 border-r-3 border-t-4 border-b-7 text-center pb-3 border-black ">
               <label>Latitude:</label>
               <input
@@ -122,8 +97,8 @@ export function Weather() {
                 `}
               />
             </div>
-            {/*right side long input*/}
-              <div className="
+
+            <div className="
             border-l-3 border-r-6 border-t-4 border-b-7 text-center pb-3 border-black
             
             ">
@@ -139,8 +114,38 @@ export function Weather() {
 
                 />
               </div>
-            
+          </div>
+          </div>
+          
+        
+      </div>
 
+
+      {/* top selection area */}
+      <div className="grid grid-cols-2 gap-l-2 w-full border-b-3 h-full w-full !border-black">
+        {/*left side dropdown*/}
+        <div className="grid-col-span-1 ml-auto mr-auto justify-center">
+          
+        </div>
+        {/*right side map placeholder*/}
+        <div className="grid-col-span-1 align-center 
+        w-9/10 
+        border-l-5 border-b-5 border-l-3 border-r-3 border-t-3 border-black
+        bg-green-600
+        mx-auto
+        p-4
+        relative
+        ">
+          {/* lat/long inputs */}
+          <div className="
+          p-2
+          flex flex-col 
+          md:flex-col md:m-2
+          lg:grid lg:grid-cols-2
+          gap-0 md:gap-2 justify-items-center align-items-center
+          ">
+            {/*left side lat input*/}
+          
             <div className="mx-auto col-span-2 mt-4 w-full h-full">
               <button
                 className="bg-green-600 text-white p-2 border-b-7 border-l-4 border-t-3 border-r-4
@@ -205,11 +210,10 @@ export function Weather() {
       {temp === "N/A" ? <p className="text-red-500">Error: {error}</p> : (
         <>
           {/* Weather info start*/}
-          <div className="border-2 w-8/12 mt-10 mx-auto 
+          <div className="border-2 w-8/12 mt-0  
         font-extrabold
         text-[clamp(1rem,2vw,4rem)]
         font-shadowy
-        mb-10
         !bg-green-600
         relative
         text-black">
@@ -230,7 +234,7 @@ export function Weather() {
             <p className="relative text-center mb-0 underline hover:scale-150 hover:border-b-3 hover:border-r-2 hover:border-l-2 hover:border-t-2 hover:w-5/10 hover:mx-auto z-[10]">
               Location: {name}
             </p>
-            <div className="grid sm:grid-cols-1 md:grid-cols-3 p-5 text-center">
+            <div className="grid sm:grid-cols-1 md:grid-cols-5 p-5 text-center">
               <p className="mt-0 pt-0 top-0 text-start hover:scale-150 hover:mx-auto  z-10" style={{ transform: "rotate(-10deg)" }}>
                 {temp}°F
               </p>

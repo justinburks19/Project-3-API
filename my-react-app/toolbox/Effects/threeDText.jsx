@@ -17,7 +17,7 @@ export function ThreeDText({
   <>
   <div className="relative overflow-hidden">
   
-<h1 className={` ${font} ${color} justify-center top-0 ${className}`}>
+<h1 className={` ${font} ${color} justify-center  ${className}`}>
     {/* Animated Title */}
         <motion.span 
         initial = {{ x: 0, opacity: 0 }}

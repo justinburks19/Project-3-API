@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import { motion } from "framer-motion";
-import { viewport } from "@popperjs/core";
 
 export function SmokeEffects({
   count = 100,               // number of smoke puffs
@@ -11,7 +10,9 @@ export function SmokeEffects({
   //control for text 
   text = false,              // optional text inside smoke puff
   myText = "💨",          // text to show if text is true
-}) {
+}) 
+  {
+
   const seeds = useMemo(() => {  // useMemmo to avoid recalculating on every render
     // lets have 2 different numbers! As a barrier to entry!
     const rnd = (min, max) => Math.random() * (max - min) + min;
@@ -22,11 +23,12 @@ export function SmokeEffects({
         const easeWay = easeway[Math.floor(Math.random() * easeway.length)]; // pick random easing from array
         const blurType = blur[Math.floor(Math.random() * blur.length)]; // pick random blur from array
         const upOrDownType = upOrDown[Math.floor(Math.random() * upOrDown.length)]; // pick random up or down from array
+        const top = rnd(0,100);
       if (!text) {  return {
       size: rnd(10, 30),               // size of the puff
       left: rnd(0, 100),               // left position in %
       delay: rnd(0, 20),                // how long to wait before starting
-      duration: rnd(2, 20),            // duration of the puff
+      duration: rnd(2, 30),            // duration of the puff
       drift: rnd(0, 10),             // going up and drifting right
       driftx: rnd(35, 75),           // going up and drifting left
       color, // pick random color from array
@@ -38,11 +40,11 @@ export function SmokeEffects({
         else { return {
         text: myText,
         left: rnd(0, 100),               // left position in %
-        delay: rnd(0, 10),                // how long to wait before starting
-        duration: rnd(5, 10),            // duration of the puff
+        delay: rnd(0, 3),                // how long to wait before starting
+        duration: rnd(2, 5),            // duration of the puff
         easeWay,
-        upOrDownType: "linear",
-        size: rnd(1,20)
+        size: rnd(1,5),               // size of the puff
+        top
 
       }; } 
 
@@ -50,23 +52,25 @@ export function SmokeEffects({
   }, [count, text, myText]); // depend only on count prop
 
   return (
-    <div className="absolute inset-0 z-1 pointer-events-none  w-full h-full  rounded-5">
+    <>
+    
       {!text ? (
+      <div className="absolute z-1 pointer-events-none  w-full h-full rounded-5 transform-gpu will-change-transform overflow-hidden">
       <div>
       {seeds.map(({ size, left, delay, duration, color, easeWay, blur, text, upOrDownType }, i) => (
         
         <motion.span
           key={i} // each puff needs a unique key 1-counter
           label ={text}
-          className={`absolute ${color} ${blur} rounded-full transform-gpu will-change-transform ${blur} bottom-0`}
+          className={`absolute ${color} ${blur} rounded-full ${blur} bottom-0 right-100 left-0 w-full h-full justify-center align-middle`}
           style={{
             left: `${left}%`,
             width: size,
             height: size,
           }}
-          initial={{x: '0%',  y: '50%', opacity: 0, scale: 0.7 }}
+          initial={{ opacity: 0, scale: 0.7 }}
           animate={{
-            x: [0,-100],  // float left or right
+            x: [0,100],  // float left or right
             y: ['0vh', '-93vh'],           // float up up or down like fire
             
             opacity: [0.1,1],
@@ -83,31 +87,34 @@ export function SmokeEffects({
         
       ))}
       </div>
-
+    </div>
       ) : (
-      <div>
+      <div className="relative z-1 pointer-events-none w-full h-full  rounded-5 mx-auto transform-gpu will-change-transform overflow-hidden"> 
+      
       <motion.span>
-      {seeds.map(({ text, left}, i) => (
+      {seeds.map(({ 
+        text, 
+        left,                                               
+        duration}, i) => (
         <motion.span
           key={i} 
-          className={`absolute inset-0 text-[clamp(.5rem,1vw,3rem)] transform-gpu will-change-transform pointer-events-none`}
+          className={`absolute text-[clamp(.5rem,1vw,3rem)] pointer-events-none`}
           style={{
             left: `${left}%`,
-            top: '-5vh',
           }}
-          initial={{ y: '0', opacity: 0, scale: 0.7 }}
+          initial={{ scale: 1.2, opacity: 0 }}
           animate={{
-            y: ['-95%','100%'], //start from top to bottom! Testing with rain effect
+            top: "100%", //goes all the way down
             //x: ['-5vh','5vw'], // can drive left to right, to left to stitmulate wind looks like like snow lol ;)
-            opacity: [.1,1],
+            opacity: [.2,1],
             scale: [1, .3],
+            brightness: [100,200]
           }}
           transition={{
-            duration: Math.random() * 20 + 5,
-            delay: Math.random() * 20,
-            ease: "easeInOut",
+            duration,
             repeat: Infinity,
             repeatType: "linear",
+            delay: 3
           }}
         >
           {text}
@@ -115,8 +122,10 @@ export function SmokeEffects({
       ))}
       </motion.span>
     </div>
+    
       )}
 
-    </div>
+    
+    </>
   );
 }

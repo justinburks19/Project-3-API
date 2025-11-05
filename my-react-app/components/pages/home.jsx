@@ -17,7 +17,7 @@ export function Home() {
 
       <div className={'min-h-dvh flex flex-col relative transform-gpu will-change-transform'}> {/* dvh for better mobile vh handling, tranform-gpu from the start! Should probably fix the others ;) */}
         {/* Outer Container */}
-        <div className={`min-h-screen border-r-15 border-t-15 border-b-20 border-l-20 border-black relative bg-black`}>
+        <div className={`min-h-screen border-r-15 border-t-15 border-b-20 border-l-20 border-black relative bg-black !w-full`}>
           {/* Inner Container */}
           <div className={` border-5 
           ${pageTracker === "Weather Api" ? '!border-green-500 !brightness-125' :
