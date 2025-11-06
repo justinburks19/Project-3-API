@@ -2,13 +2,14 @@ import { useEffect } from "react";
 import { useApi } from "../Context/ApiContext.jsx";
 
 
-export function WeatherInfo(x, y) {
+export function WeatherInfo(x, y, watch) {
     const { info, isLoading, error, fetchData } = useApi();
       useEffect(() => {
         x || y ? null : console.log("Waiting for coordinates...");
         const url = `https://api.openweathermap.org/data/2.5/weather?lat=${x}&lon=${y}&units=imperial&appid=a23d975b79770658fca7922fb1720b93`;
         fetchData(url);
-      }, [x,y]); // Dependency array includes lat and long
+
+      }, [watch]); // run once when watch changes
 
       // Extract temperature and description from the fetched info
       const name = info?.name ?? "N/A"; // Location name

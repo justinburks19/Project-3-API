@@ -20,6 +20,7 @@ export function ControlProvider({ children }) {
     const [stateLat, stateLong] = stateCords; //destructure state cords
     const [getLat, setGetLat] = useState(""); //User Cords
     const [getLong, setGetLong] = useState(""); //User Cords
+    const [fireup, setFireup] = useState(false); //for smoke effect trigger
 
   // Memoize the value object to optimize performance
   const value = useMemo(() => ({ //remember to add new states here, also save the states!
@@ -34,8 +35,9 @@ export function ControlProvider({ children }) {
     stateLat, stateLong,
     getLat, setGetLat,
     getLong, setGetLong,
+    fireup, setFireup,
   }), [show, exit, panel, hover, pageTracker, //Home states
-      label, retMethod, stateLat, stateLong, getLat, getLong //Weather states
+      label, retMethod, stateLat, stateLong, getLat, getLong, fireup //Weather states
   ]); //dependencies array
   //return the provider with the value object
   //value is an object that holds all the global states and their setters

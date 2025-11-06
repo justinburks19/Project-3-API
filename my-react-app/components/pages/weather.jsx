@@ -24,6 +24,8 @@ export function Weather() {
     setGetLat,
     getLong,
     setGetLong,
+    fireup, 
+    setFireup,
   } = useControl();
 
   //choose what to use based on retMethod
@@ -46,17 +48,18 @@ export function Weather() {
     name,
 
 
-  ] = WeatherInfo(retMethod); //When i get a new method receive the update!!
+  ] = WeatherInfo(lat, long, fireup); //call weather info with lat and long. only change when fireup changes
+
 
 
   //cordinates edits
   const labelClass = "hover:cursor-pointer w-8/10";
   return (
     //start of main container
-    <div className=" border-t-3 !border-black grid grid-cols-2"> {/* creates two column grid */}
+    <div className=" border-t-3 !border-black flex flex-row"> {/* creates two column grid */}
 
       {/* left side nav */}
-      <div className="relative gpu-accelerated-text col-span-1 pt-3 h-full border-black overflow-hidden">
+      <div className="relative gpu-accelerated-text col-span-1 pt-3 h-full border-black overflow-hidden ">
         <div className="absolute w-full h-full top-[-8%]">
           <SmokeEffects text={true} myText='💧' />
         </div>
@@ -97,6 +100,7 @@ export function Weather() {
               onSelect={(label) => {
                 setLabel(label);
                 setRetMethod("state");
+                setFireup(!fireup);
               }} // Update label on selection
             />
           </motion.div>
@@ -133,7 +137,7 @@ export function Weather() {
               <input
                 type="number"
                 value={getLong}
-                onChange={(e) => setGetLong(e.target.value)}
+                onChange={(e) => setGetLong(e.target.value) }
                 className={`${labelClass} 
                 focus:outline-none h-full w-full text-center
                 !text-[clamp(1rem,2vw,3rem)]
@@ -151,7 +155,7 @@ export function Weather() {
             w-full
             h-full
             "
-            onClick={() => setRetMethod("coords")}
+            onClick={() => { setRetMethod("coords"); setFireup(!fireup); }}
               >
                 Get Weather
               </button>
