@@ -65,7 +65,11 @@ export function Weather() {
         text-center " threeDAlignment="top-[clamp(0.1rem,.4vw,1rem)] right-[clamp(0.3rem,.4vw,1rem)]"/>
         </div>
           <div className="text-center">
-          <h1 className="!text-green-500">Select A State</h1>
+          <ThreeDText title="Select State or Enter Coordinates" className="!text-[clamp(.5rem,2vw,3rem)]
+          text-center " threeDAlignment="top-[clamp(0.1rem,.4vw,1rem)] right-[clamp(0.3rem,.4vw,1rem)]"
+          delay={3}/>
+          </div>
+          <div className="flex flex-col mx-auto w-9/10 gap-4 mt-4">
           <DropDown
             label={label}
             items={GetStates()}

@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { motion } from "framer-motion";
 
 export function SmokeEffects({
-  count = 100,               // number of smoke puffs
+  count = 50,               // number of smoke puffs
   colors = ["bg-red-700", "bg-yellow-700"],        // tailwind color for smoke
   blur = ["blur-[5px]", "blur-[6px]","blur-[2px]", "blur-[0px]"],          // tweak softness
   easeway = ["easeInOut", "easeIn", "easeOut"], //easing options
@@ -55,14 +55,14 @@ export function SmokeEffects({
     <>
     
       {!text ? (
-      <div className="absolute z-1 pointer-events-none  w-full h-full rounded-5 transform-gpu will-change-transform overflow-hidden">
+      <div className="absolute z-1 pointer-events-none  w-full h-full rounded-5 overflow-hidden">
       <div>
       {seeds.map(({ size, left, delay, duration, color, easeWay, blur, text, upOrDownType }, i) => (
         
         <motion.span
           key={i} // each puff needs a unique key 1-counter
           label ={text}
-          className={`absolute ${color} ${blur} rounded-full ${blur} bottom-0 right-100 left-0 w-full h-full justify-center align-middle`}
+          className={`absolute ${color} ${blur} rounded-full ${blur} bottom-0 right-100 left-0 w-full h-full justify-center align-middle transform-gpu will-change-transform pointer-events-none opacity-50 `}
           style={{
             left: `${left}%`,
             width: size,
@@ -89,7 +89,7 @@ export function SmokeEffects({
       </div>
     </div>
       ) : (
-      <div className="relative z-1 pointer-events-none w-full h-full  rounded-5 mx-auto transform-gpu will-change-transform overflow-hidden"> 
+      <div className="relative z-1 pointer-events-none w-full h-full  rounded-5 mx-auto overflow-hidden"> 
       
       <motion.span>
       {seeds.map(({ 
@@ -98,7 +98,7 @@ export function SmokeEffects({
         duration}, i) => (
         <motion.span
           key={i} 
-          className={`absolute text-[clamp(.5rem,1vw,3rem)] pointer-events-none`}
+          className={`absolute text-[clamp(.5rem,1vw,3rem)] pointer-events-none transform-gpu will-change-transform opacity-70 `}
           style={{
             left: `${left}%`,
           }}
