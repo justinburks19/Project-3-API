@@ -8,7 +8,7 @@ import Leaf from "../../public/leaf.svg"
 import Cloud from "../../src/assets/cloud.svg?react"
 import { useControl } from "../../toolbox/controls/useControl.jsx";
 import { ThreeDText } from "../../toolbox/Effects/threeDText.jsx";
-import{SmokeEffects} from"../../toolbox/Effects/smokeEffects.jsx"
+import { SmokeEffects } from "../../toolbox/Effects/smokeEffects.jsx"
 import WaterDrop from "../../src/assets/waterDrop.svg";
 
 export function Weather() {
@@ -45,14 +45,15 @@ export function Weather() {
     error,
     name,
 
-  ] = WeatherInfo(lat, long);
+
+  ] = WeatherInfo(retMethod); //When i get a new method receive the update!!
 
 
   //cordinates edits
   const labelClass = "hover:cursor-pointer w-8/10";
   return (
     //start of main container
-    <div className=" border-t-3 !border-black grid grid-cols-2">
+    <div className=" border-t-3 !border-black grid grid-cols-2"> {/* creates two column grid */}
 
       {/* left side nav */}
       <div className="relative gpu-accelerated-text col-span-1 pt-3 h-full border-black overflow-hidden">
@@ -60,153 +61,108 @@ export function Weather() {
           <SmokeEffects text={true} myText='💧' />
         </div>
 
-        <div className="w-90/100 mx-auto">
-        <ThreeDText title="Weather Console" begin="☁️" end="☁️" startEnd={true} className="!text-[clamp(.8rem,3vw,6rem)]
-        text-center " threeDAlignment="top-[clamp(0.1rem,.4vw,1rem)] right-[clamp(0.3rem,.4vw,1rem)]"/>
+        {/* Weather Console centering */}
+        <div className=" mx-auto">
+          <ThreeDText title="Weather Console" begin="☁️" end="☁️" startEnd={true} className="!text-[clamp(.8rem,3vw,6rem)]
+        text-center " threeDAlignment="top-[clamp(0.1rem,.4vw,1rem)] right-[clamp(0.3rem,.4vw,1rem)]" />
+
+          {/* Select State Text*/}
         </div>
-          <div className="text-center">
-          <ThreeDText title="Select State or Enter Coordinates" className="!text-[clamp(.5rem,2vw,3rem)]
+        <div className="text-center">
+          <ThreeDText title="Select State" className="!text-[clamp(.5rem,2vw,3rem)]
           text-center " threeDAlignment="top-[clamp(0.1rem,.4vw,1rem)] right-[clamp(0.3rem,.4vw,1rem)]"
-          delay={3}/>
-          </div>
-          <div className="flex flex-col mx-auto w-9/10 gap-4 mt-4">
-          <DropDown
-            label={label}
-            items={GetStates()}
-            menueClass="!bg-green-600 !text-black !text-[clamp(1rem,2vw,2rem)] hover:cursor-pointer !shadow-2xl 
+            delay={3} />
+        </div>
+
+        {/* state dropdown */}
+        <div className="flex flex-col mx-auto mt-1">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 3.5, duration: 1, ease: "easeIn" }}
+            className="flex justify-content-center">
+            <DropDown
+              label={label}
+              items={GetStates()}
+              menueClass="!bg-green-600 !text-black !text-[clamp(1rem,2vw,2rem)] hover:cursor-pointer !shadow-2xl 
             border-b-5 border-l-5 border-t-3 border-r-3
             hover:border-b-3 hover:border-l-3 hover:border-t-2 hover:border-r-2
-            border-black"
-            buttonClass="!bg-blue-500 !text-black hover:cursor-pointer "
-            listItemClass={`!border-b-6 !border-t-4 !border-l-6 !border-r-6 
+            border-black
+            "
+              buttonClass="!bg-blue-500 !text-black hover:cursor-pointer "
+              listItemClass={`!border-b-6 !border-t-4 !border-l-6 !border-r-6 
               !hover:border-b-2 !hover:border-l-2 !hover:border-r-1
               `}
-            ulClass="!p-1 !bg-green-600"
-            onSelect={(label) => {
-              setLabel(label);
-              setRetMethod("state");
-            }} // Update label on selection
-          />
-          <h1 className="!text-green-500">Or enter coordinates</h1>
-          <div className="flex flex-row px-2">
-            <div className=" border-l-6 border-r-3 border-t-4 border-b-7 text-center pb-3 border-black ">
-              <label>Latitude:</label>
+              ulClass="!p-1 !bg-green-600"
+              onSelect={(label) => {
+                setLabel(label);
+                setRetMethod("state");
+              }} // Update label on selection
+            />
+          </motion.div>
+
+          <ThreeDText title="OR" className="!text-[clamp(.5rem,2vw,3rem)]
+          text-center " threeDAlignment="top-[clamp(0.1rem,.4vw,1rem)] right-[clamp(0.3rem,.4vw,1rem)]"
+            delay={4} />
+          <ThreeDText title="Enter Coordinates" className="!text-[clamp(.5rem,2vw,3rem)]
+          text-center mb-5" threeDAlignment="top-[clamp(0.1rem,.4vw,1rem)] right-[clamp(0.3rem,.4vw,1rem)]"
+            delay={4.2} />
+
+          {/* flex row start for lat/long*/}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 4.5, duration: 1, ease: "easeIn" }}
+            className="flex flex-row border-green-600 border-5 h-full ">
+            {/* lat input */}
+            <div className=" border-x-5 border-black bg-green-600 border-b-1 flex flex-row">
+              <label className="my-auto !text-[clamp(1rem,2vw,3rem)] mx-2">X:</label>
               <input
                 type="number"
                 value={getLat}
                 onChange={(e) => setGetLat(e.target.value)}
-                className={`${labelClass} border-t-2 border-b-2 
-                focus:outline-none focus:border-l-6 focus:border-r-3 focus:border-b-6 focus:border-t-3
-                p-0 w-full h-full
+                className={`${labelClass} text-center
+                !text-[clamp(1rem,2vw,3rem)]
+                z-10 focus:outline-none
                 `}
               />
             </div>
+            {/* long input */}
+            <div className=" border-r-5 border-black bg-green-600 border-b-1 flex flex-row">
+              <label className="my-auto !text-[clamp(1rem,2vw,3rem)] mx-2 ">Y:</label>
+              <input
+                type="number"
+                value={getLong}
+                onChange={(e) => setGetLong(e.target.value)}
+                className={`${labelClass} 
+                focus:outline-none h-full w-full text-center
+                !text-[clamp(1rem,2vw,3rem)]
+                z-10 
+                
+                `}
 
-            <div className="
-            border-l-3 border-r-6 border-t-4 border-b-7 text-center pb-3 border-black
-            
-            ">
-                <label>Longitude:</label>
-                <input
-                  type="number"
-                  value={getLong}
-                  onChange={(e) => setGetLong(e.target.value)}
-                  className={`${labelClass} border-r-2 border-l-2
-                focus:outline-none focus:border-r-6 focus:border-l-3 focus:border-b-6 focus:border-t-3
-                p-1 
-                w-9/10 h-full`}
-
-                />
-              </div>
-          </div>
-          </div>
-          
-        
-      </div>
-
-
-      {/* top selection area */}
-      <div className="grid grid-cols-2 gap-l-2 w-full border-b-3 h-full w-full !border-black">
-        {/*left side dropdown*/}
-        <div className="grid-col-span-1 ml-auto mr-auto justify-center">
-          
-        </div>
-        {/*right side map placeholder*/}
-        <div className="grid-col-span-1 align-center 
-        w-9/10 
-        border-l-5 border-b-5 border-l-3 border-r-3 border-t-3 border-black
-        bg-green-600
-        mx-auto
-        p-4
-        relative
-        ">
-          {/* lat/long inputs */}
-          <div className="
-          p-2
-          flex flex-col 
-          md:flex-col md:m-2
-          lg:grid lg:grid-cols-2
-          gap-0 md:gap-2 justify-items-center align-items-center
-          ">
-            {/*left side lat input*/}
-          
-            <div className="mx-auto col-span-2 mt-4 w-full h-full">
+              />
+            </div>
+            <div className="z-10">
               <button
-                className="bg-green-600 text-white p-2 border-b-7 border-l-4 border-t-3 border-r-4
-            hover:border-b-2 hover:border-l-2 hover:border-t-1 hover:border-r-2
+                className="bg-green-600 text-white p-2
             border-black
             !text-black
-            border-transparent
-            absolute
-            left-1/2 -translate-x-1/2
+            w-full
+            h-full
             "
-                onClick={() => {
-                  setRetMethod("coords");
-                }}
+            onClick={() => setRetMethod("coords")}
               >
                 Get Weather
               </button>
             </div>
-          </div>
+          </motion.div>
         </div>
 
 
-        {/*Display of Coordinates*/}
-        {/* lets practice contorl. I have a original grid that takes up 2 splaces */}
-        <div className="mx-10 mt-4 col-span-2 
-      border-b-6 border-l-5 border-r-5 border-t-4 bg-green-600 mb-2 border-black">
-          {/* nested grid for content which splits to 2 columns */}
-          <div className="grid grid-cols-2">
-            {/* left side shows method used */}
-            <div className="col-span-1 align-content-center ">
-              {/* I want a 2 row grid inside here, flex flex-col allows for proper spacing*/}
-              <div className="flex flex-col text-center border-r-3 pb-1 ">
-                <p className="border-l-4 border-r-4 border-b-4 mb-0 mx-10 font-bold border-black">
-                  Selected Method
-                </p>
-                <p className="border-l-5 border-r-5 mx-15 border-b-4 border-b-8 mb-0 font border-black">
-                  {retMethod === "state" ? "State Coordinates" : "User Coordinates"}
-                </p>
-              </div>
-            </div>
-            {/* right side shows coordinates used test*/} 
-            <div className="col-span-1 my-auto ">
-              <div className="grid grid-cols-2 text-center">
-                <p className="mt-0 mb-0 col-span-1 mx-2
-              border-b-4 border-l-4 border-r-4 border-t-2
-              shadow-lg border-black">
-                  Latitude: {retMethod === "state" ? lat : getLat}
-                </p>
-                <p className="mt-0 mb-0 col-span-1 mx-2
-              border-b-4 border-l-4 border-r-4 border-t-2
-              shadow-lg border-black">
-                  Longitude: {retMethod === "state" ? long : getLong}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
+
+
 
 
       {/*weather info*/}

@@ -30,31 +30,31 @@ export function ThreeDText({
             initial={{rotate: 0,}}
             animate={{rotate: [-20, 20] }}
             transition={{
-                rotate:{duration: 2, ease: "easeInOut", repeat: Infinity, repeatType: "mirror", },
+                rotate:{delay: delay, duration: 2, ease: "easeInOut", repeat: Infinity, repeatType: "mirror", },
             }}
           >{begin}</motion.span> : null}
           {title}
           {startEnd ? <motion.span className="inline-block" // Ensures the span is treated as a block for rotation
-            initial={{rotate: 0, delay: delay }}
+            initial={{rotate: 0 }}
             animate={{rotate: [-20, 20] }}
             transition={{
-                rotate:{ duration: 2, ease: "easeInOut", repeat: Infinity, repeatType: "mirror", },
+                rotate:{delay: delay, duration: 2, ease: "easeInOut", repeat: Infinity, repeatType: "mirror", },
             }}>{end}</motion.span> : null}
         </motion.span>
     {/* Slide in title */}
         <div>
         <motion.span className={`absolute ${threeDAlignment} w-full h-full pointer-events-none transform-gpu`}
-        initial = {{ x:'-100%' , opacity: 0, delay: delay }}
+        initial = {{ x:'-100%' , opacity: 0}}
         animate = {{ x: 0, opacity: .20 }}
-        transition = {{duration: 2, ease: "easeInOut" }}
+        transition = {{duration: 2, ease: "easeInOut", delay: delay -1 }}
         >
 
           {startEnd ? 
           <motion.span
             className="inline-block" // Ensures the span is treated as a block for rotation
-            initial={{rotate: 0, opacity: .20, delay: delay }}
+            initial={{rotate: 0, opacity: .20, }}
             animate={{rotate: [20, -20], opacity: 1}}
-            transition={{
+            transition={{ delay: delay,
                 rotate:{duration: 2, ease: "easeInOut", repeat: Infinity, repeatType: "mirror", },
                 opacity: { duration: 2, ease: "easeInOut", repeat: Infinity, repeatType: "mirror", },
             }}
@@ -64,10 +64,10 @@ export function ThreeDText({
 
           {startEnd ? 
           <motion.span className="inline-block" // Ensures the span is treated as a block for rotation
-            initial={{rotate: 0, delay: delay }}
+            initial={{rotate: 0}}
             animate={{rotate: [20, -20] }}
             transition={{
-                rotate:{ duration: 2, ease: "easeInOut", repeat: Infinity, repeatType: "mirror", },
+                rotate:{ delay: delay -1, duration: 2, ease: "easeInOut", repeat: Infinity, repeatType: "mirror", },
             }}>{end}</motion.span> : null}
         </motion.span>
         </div>
