@@ -62,10 +62,10 @@ export function HomeButtons() {
         {/* Top of Grid X*/}
         <div className={`flex flex-rows rounded-top-5 w-full my-2 justify-between`}>
           
-          {buttons.map(({ label, index, background, borders, hover }) => (
+          {buttons.map(({ label, index, background, borders, hover }, i) => (
             !exit && (
 
-              <div key={index}>
+              <div key={i}>
                 
                 <Button
                   className={`${background} ${borders} ${hover} !text-[clamp(.7rem,1.2vw,2rem)] font-extrabold rounded-5

@@ -19,7 +19,6 @@ export function TopPage() {
   } = useControl();
   return (
     <div className="relative gpu-accelerated-text pt-3 w-full overflow-hidden shrink-0">
-
       {/* Weather Console centering */}
       <div className=" mx-auto">
         <ThreeDText
@@ -27,9 +26,9 @@ export function TopPage() {
           begin="☁️"
           end="☁️"
           startEnd={true}
-          className="!text-[clamp(.8rem,3vw,6rem)]
+          className="!text-[clamp(1.5rem,3vw,6rem)]
          text-center "
-          threeDAlignment="top-[clamp(0.1rem,.4vw,1rem)] right-[clamp(0.3rem,.4vw,1rem)]"
+          threeDAlignment="top-[clamp(0.2rem,.4vw,1rem)] right-[clamp(0.3rem,.4vw,1rem)]"
         />
 
         {/* Select State Text*/}
@@ -37,7 +36,7 @@ export function TopPage() {
       <div className="justify-center mx-auto">
         <ThreeDText
           title="Select State"
-          className="!text-[clamp(.5rem,2vw,3rem)]
+          className="!text-[clamp(1.2rem,2vw,3rem)]
            text-center "
           threeDAlignment="top-[clamp(0.1rem,.4vw,1rem)] right-[clamp(0.3rem,.4vw,1rem)]"
           delay={2}
@@ -55,7 +54,6 @@ export function TopPage() {
           <DropDown
             label={label}
             items={GetStates()}
-            
             menueClass="!bg-green-600 !text-black !text-[clamp(1rem,2vw,2rem)] hover:cursor-pointer !shadow-2xl  
              "
             buttonClass="!bg-blue-500 !text-black hover:cursor-pointer border-9"
@@ -75,14 +73,14 @@ export function TopPage() {
 
         <ThreeDText
           title="OR"
-          className="!text-[clamp(.5rem,2vw,3rem)]
+          className="!text-[clamp(2rem,2vw,4rem)]
            text-center "
-          threeDAlignment="top-[clamp(0.1rem,.4vw,1rem)] right-[clamp(0.3rem,.4vw,1rem)]"
+          threeDAlignment="top-[clamp(0.2rem,.4vw,1rem)] right-[clamp(0.3rem,.4vw,1rem)]"
           delay={2.5}
         />
         <ThreeDText
           title="Enter Coordinates"
-          className="!text-[clamp(.5rem,2vw,3rem)]
+          className="!text-[clamp(1rem,2vw,3rem)]
            text-center mb-1"
           threeDAlignment="top-[clamp(0.1rem,.4vw,1rem)] right-[clamp(0.3rem,.4vw,1rem)]"
           delay={2.8}
@@ -96,7 +94,7 @@ export function TopPage() {
           className="flex flex-row justify-center"
         >
           {/* lat input */}
-          <div className=" border-x-5 bg-green-600 border-b-1 flex flex-row rounded-5">
+          <div className="border-black border-x-5 border-y-4 bg-green-600  flex flex-row rounded-5 ">
             <label className="my-auto !text-[clamp(1rem,2vw,3rem)] mx-2">
               X:
             </label>
@@ -106,7 +104,7 @@ export function TopPage() {
               type="number"
               value={getLat}
               onChange={(e) => setGetLat(e.target.value)}
-              className={`hover:cursor-pointer%20 w-8/10 text-center
+              className={`hover:cursor-pointer w-8/10 text-center
                  !text-[clamp(1rem,2vw,3rem)]
                  z-10 focus:outline-none
                  `}
@@ -115,8 +113,8 @@ export function TopPage() {
           {/* long input */}
 
           <div
-            className=" border-r-5 border-black bg-green-600 border-b-1 flex flex-row
-               rounded-5"
+            className=" border-x-5 border-black bg-green-600 flex flex-row
+               rounded-5 border-y-4"
           >
             <label className="my-auto !text-[clamp(1rem,2vw,3rem)] mx-2 ">
               Y:
@@ -126,7 +124,7 @@ export function TopPage() {
               type="number"
               value={getLong}
               onChange={(e) => setGetLong(e.target.value)}
-              className={`hover:cursor-pointer%20w-8/10 text-center
+              className={`hover:cursor-pointer w-8/10 text-center
                  focus:outline-none h-full w-full text-center
                  !text-[clamp(1rem,2vw,3rem)]
                  z-10 
@@ -143,6 +141,7 @@ export function TopPage() {
              h-full
              !text-[clamp(2rem,2vw,3rem)]
              rounded-5
+             font-extrabold
              "
               onClick={() => {
                 setRetMethod("coords");
@@ -155,6 +154,7 @@ export function TopPage() {
         </motion.div>
       </div>
       {/* End of top of row  */}
+      
     </div>
   );
 }

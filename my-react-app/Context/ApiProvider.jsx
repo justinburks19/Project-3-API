@@ -14,7 +14,7 @@ export function ApiProvider({children}) {
         
         setIsLoading(true);
         setError(null);
-        await new Promise((e) => setTimeout(e, 100)); // Simulate loading delay of 1 second
+        await new Promise((e) => setTimeout(e, 3000)); // Simulate loading delay of 3.5 seconds
         try {
             
             const response = await fetch(url); // Fetch data from the provided URL

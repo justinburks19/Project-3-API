@@ -57,11 +57,10 @@ export function SmokeEffects({
       {!text ? (
       <div className="absolute z-1 pointer-events-none  w-full h-full rounded-5 overflow-hidden">
       <div>
-      {seeds.map(({ size, left, delay, duration, color, easeWay, blur, text, upOrDownType }, i) => (
+      {seeds.map(({ size, left, delay, duration, color, easeWay, blur, upOrDownType }, i) => (
         
         <motion.span
           key={i} // each puff needs a unique key 1-counter
-          label ={text}
           className={`absolute ${color} ${blur} rounded-full ${blur} bottom-0 right-100 left-0 w-full h-full justify-center align-middle transform-gpu will-change-transform pointer-events-none opacity-50 `}
           style={{
             left: `${left}%`,
