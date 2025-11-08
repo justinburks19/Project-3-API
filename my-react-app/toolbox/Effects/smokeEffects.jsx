@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { motion } from "framer-motion";
 
 export function SmokeEffects({
-  count = 50,               // number of smoke puffs
+  count = 80,               // number of smoke puffs
   colors = ["bg-red-700", "bg-yellow-700"],        // tailwind color for smoke
   blur = ["blur-[5px]", "blur-[6px]","blur-[2px]", "blur-[0px]"],          // tweak softness
   easeway = ["easeInOut", "easeIn", "easeOut"], //easing options
@@ -25,7 +25,7 @@ export function SmokeEffects({
         const upOrDownType = upOrDown[Math.floor(Math.random() * upOrDown.length)]; // pick random up or down from array
         const top = rnd(0,100);
       if (!text) {  return {
-      size: rnd(10, 30),               // size of the puff
+      size: rnd(10, 20),               // size of the puff
       left: rnd(0, 100),               // left position in %
       delay: rnd(0, 20),                // how long to wait before starting
       duration: rnd(2, 30),            // duration of the puff
@@ -41,7 +41,7 @@ export function SmokeEffects({
         text: myText,
         left: rnd(0, 100),               // left position in %
         delay: rnd(0, 3),                // how long to wait before starting
-        duration: rnd(2, 5),            // duration of the puff
+        duration: rnd(2, 15),            // duration of the puff
         easeWay,
         size: rnd(1,5),               // size of the puff
         top
@@ -89,32 +89,33 @@ export function SmokeEffects({
       </div>
     </div>
       ) : (
-      <div className="relative z-1 pointer-events-none w-full h-full  rounded-5 mx-auto overflow-hidden"> 
+      <div className="relative z-1 pointer-events-none w-full min-h-[105%] rounded-5 mx-auto"> 
       
       <motion.span>
       {seeds.map(({ 
         text, 
         left,                                               
-        duration}, i) => (
+        duration,
+        size}, i) => (
         <motion.span
           key={i} 
-          className={`absolute text-[clamp(.5rem,1vw,3rem)] pointer-events-none transform-gpu will-change-transform opacity-70 `}
+          className={`absolute text-${size} pointer-events-none transform-gpu will-change-transform opacity-1 brightness-300
+            0 `}
           style={{
             left: `${left}%`,
           }}
-          initial={{ scale: 1.2, opacity: 0 }}
+          initial={{ y: `${left}%` }}
           animate={{
             top: "100%", //goes all the way down
             //x: ['-5vh','5vw'], // can drive left to right, to left to stitmulate wind looks like like snow lol ;)
-            opacity: [.2,1],
-            scale: [1, .3],
+            opacity: [.8,1],
             brightness: [100,200]
           }}
           transition={{
             duration,
             repeat: Infinity,
             repeatType: "linear",
-            delay: 3
+            
           }}
         >
           {text}

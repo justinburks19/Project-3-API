@@ -3,16 +3,33 @@ import { useControl } from "../../toolbox/controls/useControl.jsx";
 import { Weather } from "../pages/weather.jsx";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { Home } from "../pages/home.jsx";
 export function HomeButtons() {
   const { show, setShow, exit, setExit, hover, setHover, pageTracker, setPageTracker } = useControl(); // Get control states and setters
 
   // Button definitions with styles and hover effects
   const buttons = [
-    { label: "Home", background: "bg-orange-500" }, //btn 4
-    { label: "Weather Api", background: "bg-green-600" }, //btn 1
-    { label: "Movie Api", background: "bg-blue-700" }, //btn 2
-    { label: "Crypto Api", background: "bg-purple-600" }, //btn 3
+    { label: "Home", background: "bg-orange-500" }, 
+    { label: "Weather", background: "bg-green-600" }, 
+    { label: "Movie", background: "bg-blue-700" }, 
+    { label: "Crypto", background: "bg-purple-600" },
   ];
+
+    const pageColor = {
+    Weather: "border-green-500 brightness-125",
+    Movie:   "border-blue-500 brightness-125",
+    Crypto:  "border-purple-500 brightness-125",
+    Home:    "border-orange-500 brightness-125",
+  };
+
+  const hoverColor = {
+    Weather: "border-green-600",
+    Movie:   "border-blue-600",
+    Crypto:  "border-purple-600",
+    Home:    "border-orange-600",
+  };
+
+  const activeUnderline = hover ? hoverColor[hover] : pageColor[pageTracker];
 
   // Handle button clicks to set content based on label
   const buttonClicks = ({ label }) => {
@@ -21,16 +38,16 @@ export function HomeButtons() {
         setPageTracker("Home");
         setShow(null);
         break;
-      case "Weather Api":
-        setPageTracker("Weather Api");
+      case "Weather":
+        setPageTracker("Weather");
         setShow(<Weather />);
         break;
-      case "Movie Api":
-        setPageTracker("Movie Api");
+      case "Movie":
+        setPageTracker("Movie");
         setShow(<div className="text-white text-center mt-10">Movie Api Coming Soon!</div>);
         break;
-      case "Crypto Api":
-        setPageTracker("Crypto Api");
+      case "Crypto":
+        setPageTracker("Crypto");
         setShow(<div className="text-white text-center mt-10">Crypto Api Coming Soon!</div>);
         break;
       default:
@@ -41,20 +58,21 @@ export function HomeButtons() {
     <>
       {/* Main container for buttons */}
 
-      <div className={`mx-auto`}>
+      
         {/* Top of Grid X*/}
-        <div className={`grid grid-cols-12 justify-items-inbetween items-center justify-center  rounded-top-5 w-full `}>
-
+        <div className={`flex flex-rows rounded-top-5 w-full my-2 justify-between`}>
+          
           {buttons.map(({ label, index, background, borders, hover }) => (
             !exit && (
 
-              <div key={index} className={`px-1 ${label === "Home" ? "col-span-6 !w-3/10 mx-auto" : "col-span-2"} w-full`}>
+              <div key={index}>
                 
                 <Button
-                  className={`${background} ${borders} ${hover} !text-[clamp(1rem,1.2vw,2rem)] w-full font-bold rounded-5
-                border-t-7 border-r-7 border-b-10 border-l-7 p-2 4-2 
+                  className={`${background} ${borders} ${hover} !text-[clamp(.7rem,1.2vw,2rem)] font-extrabold rounded-5
+                border-t-7 border-r-7 border-b-10 border-l-7 
                 border-slate-700
                 hover:border-b-4 hover:border-l-4 hover:border-t-4 hover:border-r-4
+                !w-[clamp(4.3rem,8vw,12rem)] 
                 
                 `}
                   onMouseEnter={() => setHover(label)}
@@ -70,17 +88,7 @@ export function HomeButtons() {
           ))}
         </div>
         {/* Bottom line*/}
-        <div className={`border-b-5 
-      ${hover === "Weather Api" ? '!border-green-600' :
-            hover === "Movie Api" ? '!border-blue-700' :
-              hover === "Crypto Api" ? '!border-purple-600' :
-                hover === "Home" ? '!border-orange-500' : null} 
-                ${pageTracker === "Weather Api" ? '!border-green-500' :
-                    pageTracker === 'Movie Api' ? 'border-blue-500' : 
-                      pageTracker === 'Crypto Api' ? 'border-purple-500' : 
-                        pageTracker === 'Home' ? 'border-orange-500' : 'border-slate-700'}`}>
-
-        </div>
+        <div className={`w-full ${!exit ? "border-b-2" : ""} ${activeUnderline} `} />
 
 
         {/* Bottom of Grid X*/}
@@ -105,7 +113,7 @@ export function HomeButtons() {
         }
 
         <div>{!exit && show}</div>
-      </div>
+      
     </>
   );
 }

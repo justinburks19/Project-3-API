@@ -5,6 +5,7 @@ import { motion, transform } from "framer-motion";
 import Cloud from "../../src/assets/cloud.svg?react";
 import WindUrl from "../../public/wind.svg";
 import { ThreeDText } from "../../toolbox/Effects/threeDText.jsx";
+import { useEffect } from "react";
 
 //bottom page component to show weather info
 export function BottomPage() {
@@ -47,25 +48,35 @@ export function BottomPage() {
     {label: "Wind Degree", value: windDeg},
     {label: "Cloudiness", value: cloudiness},
   ]
-  
+
+
     return (
-      <>
+      <div >
            {/* Weather info start*/}
-           {getLat > 90 || getLat < -90 || getLong > 180 || getLong < -180 ? (
+
+        
+        {getLat > 90 || getLat < -90 || getLong > 180 || getLong < -180 ? (
+        <div className="flex min-h-[30vh]">
         <div className="text-red-600 font-bold text-center
         text-[clamp(1rem,2vw,4rem)]
+        mx-auto
+        my-auto
         ">
           Please enter valid coordinates.
         </div>
+        </div>
            ) 
            : isLoading ? (
-            <div className="text-blue-600 font-bold text-center
+            <div className="flex min-h-[30vh]">
+            <div className="text-blue-600 font-bold text-center 
             text-[clamp(1rem,2vw,4rem)]
-            
+            h-full
+            flex
             ">
-              
-              Loading weather data...
-              </div> )
+
+              <div className="h-6 rounded-xl bg-slate-200 w-5/10 translate-x-[50%] animate-pulse" />
+              </div> 
+              </div>)
               : (
            
           <div className=" mt-0  
@@ -88,8 +99,9 @@ export function BottomPage() {
                 />
 
               </div> : null}
+            
               <ThreeDText title={name ? `Weather in ${name}` : "Weather Info"} className="!text-[clamp(1.5rem,2.5vw,4rem)] text-center mb-0" color="!text-blue-600"/>
-            <div className="grid grid-cols-4 ">
+            <div className="grid grid-cols-4">
             {info.map((item, i) => (
               <div key={i}
               className="text-blue-600 border-green-500 border-2 md:pb-5 flex flex-col
@@ -103,7 +115,7 @@ export function BottomPage() {
             )}
 
 
-</>
+</div>
     );
     
 

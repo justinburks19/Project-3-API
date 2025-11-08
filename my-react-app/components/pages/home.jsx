@@ -8,28 +8,39 @@ import { HomeTitle } from "../homepage/homeTitle.jsx";
 export function Home() {
   const { show, hover, pageTracker,} = useControl();
 
-  const { bg = {} } = UseTimeTheme(); // Get time-based theme which returns bg and borderClass objects.
+    const pageColor = {
+    Weather: "border-green-500 brightness-125",
+    Movie:   "border-blue-500 brightness-125",
+    Crypto:  "border-purple-500 brightness-125",
+    Home:    "border-orange-500 brightness-125",
+  };
 
+  const hoverColor = {
+    Weather: "border-green-600",
+    Movie:   "border-blue-600",
+    Crypto:  "border-purple-600",
+    Home:    "border-orange-600",
+  };
 
+  const bg = {
+    Home: "bg-gradient-to-b from-black via-gray-800 to-black",
+    Weather: "bg-gradient-to-b from-black via-green-800 to-black",
+    Movie: "bg-gradient-to-b from-black via-blue-800 to-black",
+    Crypto: "bg-gradient-to-b from-black via-purple-800 to-black",
+
+  }
+
+  const activeUnderline = hover ? hoverColor[hover] : pageColor[pageTracker];
   return (
     // Home Page Container
     <>
 
-      <div className={'min-h-dvh flex flex-col relative transform-gpu will-change-transform'}> {/* dvh for better mobile vh handling, tranform-gpu from the start! Should probably fix the others ;) */}
+      <div className={'min-h-screen flex flex-col relative'}>
         {/* Outer Container */}
         <div className={`min-h-screen border-r-15 border-t-15 border-b-20 border-l-20 border-black relative bg-black !w-full`}>
           {/* Inner Container */}
-          <div className={` border-5 
-          ${pageTracker === "Weather Api" ? '!border-green-500 !brightness-125' :
-              pageTracker === 'Movie Api' ? 'border-blue-500 !brightness-125' :
-                pageTracker === 'Crypto Api' ? 'border-purple-500 !brightness-125' :
-                  pageTracker === 'Home' ? 'border-orange-500 !brightness-125' : 'border-slate-700'} absolute inset-0 shadow-lg rounded-5 
-            ${hover === 'Weather Api' ? '!border-green-600 ' :
-              hover === 'Movie Api' ? '!border-blue-600' :
-                hover === 'Crypto Api' ? '!border-purple-600' :
-                  hover === 'Home' ? '!border-orange-600' : ''}`} style={{ ...bg, }}>
+          <div className={` border-2 absolute inset-0 shadow-lg rounded-5 ${activeUnderline} ${bg[pageTracker]} overflow-hidden`}>
             {!show && <SmokeEffects />}
-            {/* start of Button Grid */}
             <HomeButtons />
           </div>
           <HomeTitle />

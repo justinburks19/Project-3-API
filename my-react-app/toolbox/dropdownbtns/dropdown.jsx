@@ -14,7 +14,8 @@ export const DropDown = forwardRef(function Dropdown(
     menueBorderColor = "!border-black",
     menueBorder = "border",
     buttonClass = "",
-    maxHeight = "max-h-60",
+    maxHeight = "max-h-50vh",
+    ulPosition = "left-1/2 translate-x-[-50%]",
     //pointers
     pointer = "hover:cursor-pointer",
     listItemClass = "",
@@ -28,16 +29,15 @@ export const DropDown = forwardRef(function Dropdown(
 
   return (
     // Toolbox Dropdown Button using Bootstrap 5
-    <div className="dropdown" ref={ref}>
+    <div className="dropdown relative" ref={ref}>
       {/* Dropdown Toggle Button */}
       <button
-        className={` dropdown-toggle rounded p-1 border-b-1 
+        className={`rounded-4 p-1 border-b-1 
         ${shadow ? "shadow" : ""}  
         ${pointer}
         ${menueClass}
         `} // Bootstrap 5 class
         type="button" // ← BS5 data attribute
-        data-bs-toggle="dropdown" // ← BS5 data attribute
         aria-expanded="false" // ← Accessibility attribute
         onClick={() => setOpen(!open)
           
@@ -47,31 +47,34 @@ export const DropDown = forwardRef(function Dropdown(
         {label}
       </button>
       {/* Dropdown Menu Items */}
+      <div className="w-full">
       {open && (
+      
       <ul
         className={`dropdown-menu ${menueBorder} 
         ${menueRound} ${menueBorderColor} ${menueBorder}
         ${shadow ? "shadow-lg" : ""} 
         !hover:cursor-pointer
-        ${maxHeight} 
-        !w-[clamp(5rem,35vw,41rem)]
-
-
-        left-5/10
-        -translate-x-5/10
-        overflow-y-auto
-        !grid !grid-cols-1 
+        !grid 
+        !grid-cols-1 
         sm:!grid-cols-2
-        
-        !border-b-7
-        !border-l-5
-        !border-t-3
-        !border-r-3
+        md:!grid-cols-3
+        lg:!grid-cols-3
+        xl:!grid-cols-4
         gap-1
         sm:gap-0
-        ![--bs-dropdown-min-width:0]
+        
+        absolute
+        top-full
+        ${ulPosition}
+        w-[clamp(8rem,40vw,50rem)]
+        overflow-y-auto
+        overscroll-contain
+        scroll-smooth
         ${ulClass}
+
         `}
+        
       >
         {items.length > 0 ? (
           items.map((item, index) => (
@@ -105,6 +108,7 @@ export const DropDown = forwardRef(function Dropdown(
         )}
       </ul>
       )}
+    </div>
     </div>
   );
 });

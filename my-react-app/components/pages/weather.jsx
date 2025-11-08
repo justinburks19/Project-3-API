@@ -9,12 +9,13 @@ import { TopPage } from "../weatherpage/topPage.jsx";
 export function Weather() {
   return (
     //start of main container
-    <div className="flex flex-col"> {/* creates two column grid */}
 
+    <div className="flex flex-col relative overflow-hidden"> {/* creates two column grid */}
+      <div className="absolute w-full h-full top-0 pointer-events-none">
+        <SmokeEffects text={true} myText="❄️" />
+      </div>
       {/* Top of row */}
-      
-      
-        <TopPage />
+      <TopPage />
       
       
       {/* Bottom of row */}
