@@ -11,6 +11,7 @@ export function WeatherInfo(x, y, watch) {
 
       }, [watch]); // run once when watch changes
 
+
       // Extract temperature and description from the fetched info
       const name = info?.name ?? "N/A"; // Location name
       const temp = info?.main?.temp ?? "N/A"; // Temperature in Fahrenheit

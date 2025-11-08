@@ -9,7 +9,7 @@ import { TopPage } from "../weatherpage/topPage.jsx";
 export function Weather() {
   return (
     //start of main container
-    <div className=" border-t-3 !border-black flex flex-col"> {/* creates two column grid */}
+    <div className="flex flex-col"> {/* creates two column grid */}
 
       {/* Top of row */}
       
@@ -19,7 +19,6 @@ export function Weather() {
       
       {/* Bottom of row */}
       <BottomPage />
-      <p>Test2</p>
       {/* End of main container  */}
     </div>
   );
