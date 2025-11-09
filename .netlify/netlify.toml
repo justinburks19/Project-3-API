@@ -1,20 +1,13 @@
-functionsDirectory = "Z:\\Class Project\\Projects\\tailwind-css\\my-react-app\\netlify\\functions"
-functionsDirectoryOrigin = "config-v1"
+functionsDirectory = "/workspaces/Project-3-API/netlify/functions"
+functionsDirectoryOrigin = "default"
 plugins = []
 headers = []
 redirects = []
 
-[functions]
-
-[functions."*"]
-
 [build]
-publish = "Z:\\Class Project\\Projects\\tailwind-css\\my-react-app\\dist"
-publishOrigin = "config"
-commandOrigin = "config"
-base = "Z:\\Class Project\\Projects\\tailwind-css\\my-react-app"
-command = "npm run dev"
-functions = "Z:\\Class Project\\Projects\\tailwind-css\\my-react-app\\netlify\\functions"
+publish = "/workspaces/Project-3-API"
+publishOrigin = "default"
+functions = "/workspaces/Project-3-API/netlify/functions"
 
 [build.environment]
 
@@ -29,3 +22,7 @@ functions = "Z:\\Class Project\\Projects\\tailwind-css\\my-react-app\\netlify\\f
 [build.processing.js]
 
 [build.services]
+
+[functions]
+
+[functions."*"]

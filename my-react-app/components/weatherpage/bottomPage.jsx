@@ -39,8 +39,8 @@ export function BottomPage() {
 
 
   ] = WeatherInfo(lat, long, fireup); //call weather info with lat and long. only change when fireup changes
-  const info = [{ label: "Temperature", value: temp },
-  { label: "SkyView", value: description },
+  const info = [{ label: "Temperature", value: temp + "°F" },
+  { label: "SkyView", value: description},
   { label: "Pressure", value: pressure },
   { label: "Humidity", value: humidity },
   { label: "Sea Level", value: seaLevel },
@@ -110,8 +110,8 @@ export function BottomPage() {
                   <div key={i}
                     className={`text-blue-600 border-green-500 border-2 md:pb-5 flex flex-col
               wx-9/10 justify-center items-center m-2 rounded-2`}>
-                    <h1 className="!font-extrabold border-x-2 border-b-2 border-green-500 rounded-2 !text-[clamp(0.9rem,2vw,4rem)] p-1">{item.label}</h1>
-                    <h1 className="!text-[clamp(1rem,3vw,4rem)]">{item.value}</h1>
+                    <h1 className="!font-extrabold border-x-2 border-b-2 border-green-500 rounded-2 !text-[clamp(0.9rem,2vw,4rem)] p-1">{`${item.label }`}</h1>
+                    <h1 className="!text-[clamp(1rem,3vw,4rem)]">{`${item.value}`}</h1>
                   </div>
                 ))}
               </div>
