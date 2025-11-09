@@ -4,6 +4,7 @@ import { Weather } from "../pages/weather.jsx";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Home } from "../pages/home.jsx";
+import { Movies } from "../pages/movies.jsx";
 export function HomeButtons() {
   const { show, setShow, exit, setExit, hover, setHover, pageTracker, setPageTracker } = useControl(); // Get control states and setters
 
@@ -44,7 +45,7 @@ export function HomeButtons() {
         break;
       case "Movie":
         setPageTracker("Movie");
-        setShow(<div className="text-white text-center mt-10">Movie Api Coming Soon!</div>);
+        setShow(<Movies />);
         break;
       case "Crypto":
         setPageTracker("Crypto");

@@ -1,22 +1,23 @@
-/* eslint-env node */
-
-// GET /.netlify/functions/weather?lat=40.7&lon=-74.0&units=imperial
-exports.handler = async (event) => {
+// netlify/functions/weather.js
+export async function handler(event) {
   try {
-    const params = event.queryStringParameters || {};
-    const lat   = params.lat;
-    const lon   = params.lon;
-    const units = params.units || "imperial";
+    const params = event.queryStringParameters || {}; // Get query parameters
+    if (!params) {
+      return { statusCode: 400, body: JSON.stringify({ error: "Missing query parameters" }) };
+    }
+    const lat = params.lat; // Get latitude
+    const lon = params.lon; // Get longitude
+    const units = params.units || "imperial"; // Default to imperial if not provided
 
     if (!lat || !lon) {
-      return { statusCode: 400, body: "Missing lat or lon" };
+      return { statusCode: 400, body: JSON.stringify({ error: "Missing lat or lon" }) }; 
     }
 
-    const apiKey = process.env.OPENWEATHER_KEY; // set on the site (server-side)
+    const apiKey = process.env.OPENWEATHER_KEY; //api key from environment variable
     if (!apiKey) {
-      return { statusCode: 500, body: "Missing OPENWEATHER_KEY" };
+      return { statusCode: 500, body: JSON.stringify({ error: "Missing OPENWEATHER_KEY" }) };
     }
-
+    //encodeURIComponent to ensure special characters are handled correctly
     const url = `https://api.openweathermap.org/data/2.5/weather` +
                 `?lat=${encodeURIComponent(lat)}` +
                 `&lon=${encodeURIComponent(lon)}` +
@@ -24,18 +25,18 @@ exports.handler = async (event) => {
                 `&appid=${apiKey}`;
 
     const resp = await fetch(url);
-    const text = await resp.text(); // pass JSON straight through
+    const body = await resp.text();
 
     return {
       statusCode: resp.status,
       headers: {
         "Content-Type": "application/json",
-        // optional caching; safe to remove
-        "Cache-Control": "public, max-age=60"
+        "Access-Control-Allow-Origin": "*",
+        // "Cache-Control": "public, max-age=60"  // optional
       },
-      body: text
+      body
     };
   } catch (err) {
-    return { statusCode: 500, body: "Server error: " + err.message };
+    return { statusCode: 500, body: JSON.stringify({ error: "Server error" }) };
   }
-};
+}
