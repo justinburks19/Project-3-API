@@ -81,7 +81,17 @@ export function BottomPage() {
               Collecting Data... Please wait
             </div>
           </div>)
-          : (
+          : error ? (
+            <div className="flex min-h-[30vh]">
+              <div className="text-red-600 font-bold text-center
+        text-[clamp(1rem,2vw,4rem)]
+        mx-auto
+        my-auto
+        ">
+                Error fetching data: {error}
+              </div>
+            </div>
+          ) : (
 
             <div className=" mt-0  
         font-extrabold
