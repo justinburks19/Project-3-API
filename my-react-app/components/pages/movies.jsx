@@ -48,11 +48,6 @@ export function Movies() {
             <div>
             </div>
             <div className="flex text-black relative w-full justify-content-center">
-                    <div>
-                        {error ? (<div className="text-red-600 absolute">Error fetching data: {error}</div>) : loading ? (
-                            <div className="text-blue-600 absolute right-1/2 translate-x-1/2"><p>Loading movie data...</p></div>
-                        ) : null}
-                    </div>
                     <div className="bg-gray-500 rounded-4 mx-auto mt-4 border-blue-500 border-3">
                     {info.some(item => item.value !== "N/A") && (
                         <div className="flex flex-col text-center mt-2">
