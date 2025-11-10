@@ -34,3 +34,6 @@ dist-ssr
 .netlify
 .netlify
 .netlify
+
+# Environment variables
+my-react-app/.env

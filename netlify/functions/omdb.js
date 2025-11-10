@@ -4,25 +4,26 @@ export async function handler(event) {
         if (!params) {
             return { statusCode: 400, body: JSON.stringify({ error: "Missing query parameters" }) };
         }
-        const search = params.search; // Get search term
-        if (!search) {
-            return { statusCode: 400, body: JSON.stringify({ error: "Missing search parameter" }) };
+        const [title] = [params.t];
+        if (!title) {
+            return { statusCode: 400, body: JSON.stringify({ error: "Missing title parameter" }) };
         }
-
-        const apiKey = process.env.OMDB_KEY; // Get API key from environment variable
-        if (!apiKey) { // Check if API key is missing
+        const apiKey = process.env.OMDB_KEY; //api key from environment variable
+        if (!apiKey) {
             return { statusCode: 500, body: JSON.stringify({ error: "Missing OMDB_KEY" }) };
         }
-
-        const url = `http://www.omdbapi.com/?t=${encodeURIComponent(search)}&apikey=${apiKey}`; // Construct URL with encoded search term
+        //encodeURIComponent to ensure special characters are handled correctly
+        const url = `http://www.omdbapi.com/` +
+                    `?t=${encodeURIComponent(title)}` +
+                    `&apikey=${apiKey}`;
         const resp = await fetch(url);
         const body = await resp.text();
-
         return {
             statusCode: resp.status,
             headers: {
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Origin": "*",
+                // "Cache-Control": "public, max-age=60"  // optional
             },
             body
         };

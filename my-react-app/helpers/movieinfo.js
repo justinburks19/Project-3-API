@@ -4,10 +4,11 @@ import { useApi } from "../Context/ApiContext.jsx";
 export function MovieInfo({ searchTerm }){
     const { data, error, loading, fetchData } = useApi();
     useEffect(() => {
-        searchTerm ? null : console.log("Waiting for search term...");
-        const url = `/.netlify/functions/movies?search=${encodeURIComponent(searchTerm)}`;
+        const name = String(searchTerm).trim(); // Ensure searchTerm is a string and trim whitespace
+        !name ? console.log("Waiting for search term...") : null;
+        const url = `/api/ombd/title?t=${name}`; // URL for the Netlify function
         fetchData(url);
-    }, [searchTerm]);
+    }, [searchTerm, fetchData]); // run once when searchTerm changes
 
     const title = data?.Title ?? "N/A";
     const year = data?.Year ?? "N/A";

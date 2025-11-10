@@ -20,6 +20,12 @@ export function Movies() {
                 <h1 className="text-4xl font-bold text-center mt-10">Movies Page</h1>
                 <p className="text-center mt-4">This is where you can find information about movies.</p>
                 <div className="flex flex-col items-center mt-10">
+                    <p>${rating}</p>
+                    <div>
+                        {error ? (<div className="text-red-600">Error fetching data: {error}</div>) : loading ? (
+                            <div className="text-blue-600">Loading movie data...</div>
+                        ) : null}
+                    </div>
                     {info.map((item, index) => (
                         <div key={index} className="flex justify-between w-full max-w-2xl p-4 border-b">
                             <span className="font-bold">{item.label}:</span>

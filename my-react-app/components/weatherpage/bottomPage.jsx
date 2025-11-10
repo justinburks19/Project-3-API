@@ -36,8 +36,6 @@ export function BottomPage() {
     isLoading,
     error,
     name,
-
-
   ] = WeatherInfo(lat, long, fireup); //call weather info with lat and long. only change when fireup changes
   const info = [{ label: "Temperature", value: temp + "°F" },
   { label: "SkyView", value: description},
