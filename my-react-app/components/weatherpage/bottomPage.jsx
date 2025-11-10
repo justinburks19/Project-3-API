@@ -112,14 +112,14 @@ export function BottomPage() {
 
                 </div> : null}
 
-              <ThreeDText title={name ? `Weather in ${name}` : "Weather Info"} className="!text-[clamp(1.5rem,3vw,4rem)] text-center" color="!text-blue-600" threeDAlignment="top-[clamp(0.2rem,.4vw,1rem)] right-[clamp(0.3rem,.4vw,1rem)]"/>
-              <div className="grid md:grid-cols-3 grid-cols-3">
+              <ThreeDText title={name ? `Weather in ${name}` : "Weather Info"} className="!text-[clamp(1.5rem,2vw,4rem)] text-center" color="!text-blue-600" threeDAlignment="top-[clamp(0.2rem,.4vw,1rem)] right-[clamp(0.3rem,.4vw,1rem)]"/>
+              <div className="grid sm:grid-cols-3 md:grid-cols-4 grid-cols-4">
                 {info.map((item, i) => (
                   <div key={i}
-                    className={`text-blue-600 border-green-500 border-2 md:pb-5 flex flex-col
+                    className={`text-blue-600 border-green-500 border-2 flex flex-col
               wx-9/10 justify-center items-center m-2 rounded-2`}>
                     <h1 className="!font-extrabold border-x-2 border-b-2 border-green-500 rounded-2 !text-[clamp(0.9rem,2vw,4rem)] p-1">{`${item.label }`}</h1>
-                    <h1 className="!text-[clamp(1rem,3vw,4rem)]">{`${item.value}`}</h1>
+                    <h1 className="!text-[clamp(1rem,2.3vw,3rem)]">{`${item.value}`}</h1>
                   </div>
                 ))}
               </div>
