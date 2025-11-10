@@ -1,33 +1,24 @@
 export async function handler(event) {
-    try {
-        const params = event.queryStringParameters || {}; // Get query parameters
-        if (!params) {
-            return { statusCode: 400, body: JSON.stringify({ error: "Missing query parameters" }) };
-        }
-        const [title] = [params.t];
-        if (!title) {
-            return { statusCode: 400, body: JSON.stringify({ error: "Missing title parameter" }) };
-        }
-        const apiKey = process.env.OMDB_KEY; //api key from environment variable
-        if (!apiKey) {
-            return { statusCode: 500, body: JSON.stringify({ error: "Missing OMDB_KEY" }) };
-        }
-        //encodeURIComponent to ensure special characters are handled correctly
-        const url = `http://www.omdbapi.com/` +
-                    `?t=${encodeURIComponent(title)}` +
-                    `&apikey=${apiKey}`;
-        const resp = await fetch(url);
-        const body = await resp.text();
-        return {
-            statusCode: resp.status,
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
-                // "Cache-Control": "public, max-age=60"  // optional
-            },
-            body
-        };
-    } catch (err) {
-        return { statusCode: 500, body: JSON.stringify({ error: "Server error" }) };
-    }
+    const param = event.queryStringParameters || {};
+    const [title] = [param.t]; // Get title from query parameters
+    !title ? j(400, { error: "title required" }) : null;
+    const key = process.env.OMDB_KEY;
+    !key ? j(500, { error: "Missing OMDB_KEY" }) : null;
+    const url = `http://www.omdbapi.com/?t=${encodeURIComponent(title)}&apikey=${key}`;
+
+    const response = await fetch(url);
+    const body = await response.text(); // keep as text; avoids double parsing
+    return {
+        statusCode: response.status,
+        headers: { "Content-Type": response.headers.get("content-type") || "application/json" },
+        body
+    };
+}
+
+function j(statusCode, obj) {
+    return {
+        statusCode,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+        body: JSON.stringify(obj)
+    };
 }

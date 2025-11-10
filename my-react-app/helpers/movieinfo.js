@@ -1,23 +1,26 @@
-import { useEffect } from "react";
+import {useEffect } from "react";
 import { useApi } from "../Context/ApiContext.jsx";
 
-export function MovieInfo({ searchTerm }){
-    const { data, error, loading, fetchData } = useApi();
+export function MovieInfo({searchTerm, change}){
+    const { info, isLoading, error, fetchData } = useApi();
+    
     useEffect(() => {
         const name = String(searchTerm).trim(); // Ensure searchTerm is a string and trim whitespace
         !name ? console.log("Waiting for search term...") : null;
-        const url = `/api/ombd/title?t=${name}`; // URL for the Netlify function
+        const url = `/.netlify/functions/omdb?t=${name}`; // URL for the Netlify function
         fetchData(url);
-    }, [searchTerm, fetchData]); // run once when searchTerm changes
+    }, [change]); // run once when searchTerm changes
 
-    const title = data?.Title ?? "N/A";
-    const year = data?.Year ?? "N/A";
-    const genre = data?.Genre ?? "N/A";
-    const director = data?.Director ?? "N/A";
-    const plot = data?.Plot ?? "N/A";
-    const poster = data?.Poster ?? "N/A";
-    const rating = data?.imdbRating ?? "N/A";
-    const runtime = data?.Runtime ?? "N/A";
 
-    return [title, year, genre, director, plot, poster, rating, runtime, loading, error];
+    // Extract movie details from the fetched info
+    const title = info?.Title ?? "N/A";
+    const year = info?.Year ?? "N/A";
+    const genre = info?.Genre ?? "N/A";
+    const director = info?.Director ?? "N/A";
+    const plot = info?.Plot ?? "N/A";
+    const poster = info?.Poster ?? "N/A";
+    const rating = info?.imdbRating ?? "N/A";
+    const runtime = info?.Runtime ?? "N/A";
+
+    return [title, year, genre, director, plot, poster, rating, runtime, isLoading, error];
 }
