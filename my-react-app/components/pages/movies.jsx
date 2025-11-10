@@ -4,7 +4,7 @@ import { ThreeDText } from "../../toolbox/Effects/threeDText.jsx";
 export function Movies() {
     const [searchTerm, setSearchTerm] = useState(""); // State for the movie title input
     const [change, setChange] = useState(0); // State to trigger re-fetching data
-    const [title, year, genre, director, plot, poster, rating, runtime, loading, error] = MovieInfo({ searchTerm, change}); // Fetch movie info based on searchTerm and change
+    const [title, year, genre, director, plot, poster, rating, runtime, isloading, error] = MovieInfo({ searchTerm, change}); // Fetch movie info based on searchTerm and change
     const info = [
         { label: "Poster", value: poster },
         { label: "Title", value: title },
@@ -15,7 +15,7 @@ export function Movies() {
         { label: "Rating", value: rating },
         { label: "Runtime", value: runtime },
     ];
-    loading ? <div className="text-center mt-10">Loading...</div> : null;
+    isloading ? <div className="text-center mt-10 text-red-600">Loading...</div> : null;
     error ? <div className="text-center mt-10 text-red-600">Error: {error}</div> : null;
     return (
         <>
@@ -45,8 +45,7 @@ export function Movies() {
                 
                 
             </div>
-            <div>
-            </div>
+            <div><p>Test</p></div>
             <div className="flex text-black relative w-full justify-content-center">
                     <div className="bg-gray-500 rounded-4 mx-auto mt-4 border-blue-500 border-3">
                     {info.some(item => item.value !== "N/A") && (
