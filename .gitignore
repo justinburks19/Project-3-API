@@ -29,3 +29,11 @@ dist-ssr
 # subapp ignores
 /my-react-app/node_modules
 /my-react-app/dist
+
+# Local Netlify folder
+.netlify
+.netlify
+.netlify
+
+# Environment variables
+my-react-app/.env
