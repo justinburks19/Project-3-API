@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useApi } from "../Context/ApiContext.jsx";
 
 
-export function WeatherInfo({x, y, watch}) {
+export function WeatherInfo(x, y, watch) {
     const { info, isLoading, error, fetchData } = useApi();
       useEffect(() => {
         x || y ? null : console.log("Waiting for coordinates...");

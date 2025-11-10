@@ -2,7 +2,7 @@ import {useEffect } from "react";
 import { useApi } from "../Context/ApiContext.jsx";
 
 export function MovieInfo({searchTerm, change}){
-    const { info, isLoading, error, fetchData } = useApi();
+    const { info, isloading, error, fetchData } = useApi();
     
     useEffect(() => {
         const name = String(searchTerm).trim(); // Ensure searchTerm is a string and trim whitespace
@@ -22,5 +22,5 @@ export function MovieInfo({searchTerm, change}){
     const rating = info?.imdbRating ?? "N/A";
     const runtime = info?.Runtime ?? "N/A";
 
-    return [title, year, genre, director, plot, poster, rating, runtime, isLoading, error];
+    return [title, year, genre, director, plot, poster, rating, runtime, isloading, error];
 }
