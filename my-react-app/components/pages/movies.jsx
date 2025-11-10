@@ -4,7 +4,7 @@ import { ThreeDText } from "../../toolbox/Effects/threeDText.jsx";
 export function Movies() {
     const [searchTerm, setSearchTerm] = useState(""); // State for the movie title input
     const [change, setChange] = useState(0); // State to trigger re-fetching data
-    const [title, year, genre, director, plot, poster, rating, runtime, isloading, error] = MovieInfo({ searchTerm, change}); // Fetch movie info based on searchTerm and change
+    const [title, year, genre, director, plot, poster, rating, runtime, isLoading, error] = MovieInfo({ searchTerm, change}); // Fetch movie info based on searchTerm and change
     const info = [
         { label: "Poster", value: poster },
         { label: "Title", value: title },
@@ -15,8 +15,6 @@ export function Movies() {
         { label: "Rating", value: rating },
         { label: "Runtime", value: runtime },
     ];
-    isloading ? <div className="text-center mt-10 text-red-600">Loading...</div> : null;
-    error ? <div className="text-center mt-10 text-red-600">Error: {error}</div> : null;
     return (
         <>
         <div className="flex flex-col items-center mt-2">
@@ -45,8 +43,16 @@ export function Movies() {
                 
                 
             </div>
-            <div><p>Test</p></div>
+            <div>
+                
+            </div>
+
             <div className="flex text-black relative w-full justify-content-center">
+                {isLoading ? (
+                    <div className="text-center mt-4">Loading...</div>
+                ) : error ? (
+                    <div className="text-center mt-4 text-red-500">Error: {error}</div>
+                ) : (
                     <div className="bg-gray-500 rounded-4 mx-auto mt-4 border-blue-500 border-3">
                     {info.some(item => item.value !== "N/A") && (
                         <div className="flex flex-col text-center mt-2">
@@ -59,7 +65,7 @@ export function Movies() {
                         </div>
                     )}
                 </div>
-
+                )}
                 
             </div>
         </>

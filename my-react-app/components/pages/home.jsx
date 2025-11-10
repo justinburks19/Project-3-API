@@ -9,10 +9,10 @@ export function Home() {
   const { show, hover, pageTracker,} = useControl();
 
     const pageColor = {
-    Weather: "border-green-500 brightness-125",
-    Movie:   "border-blue-500 brightness-125",
-    Crypto:  "border-purple-500 brightness-125",
-    Home:    "border-orange-500 brightness-125",
+    Weather: "border-green-500 ",
+    Movie:   "border-blue-500 ",
+    Crypto:  "border-purple-500 ",
+    Home:    "border-orange-500 ",
   };
 
   const hoverColor = {
